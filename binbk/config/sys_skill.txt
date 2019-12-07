@@ -1,0 +1,7 @@
+id	skillName	skillDescription	skillRange	skillSpeed	skillStatus	skillTime
+1	火龙吐吸	子弹	800	1500	200	8000
+2	火雨	AOE	800	1500	200	8000
+3	攻击	增加攻击伤害	0	0	15	5000
+4	暴击	增加暴击伤害	0	0	15	5000
+5	防御	增加防御	0	0	15	5000
+6	速度	增加速度	0	0	15	5000

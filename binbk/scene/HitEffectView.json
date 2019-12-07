@@ -1,0 +1,1 @@
+{"type":"View","props":{"y":136,"x":136,"width":272,"height":273,"anchorY":0.5,"anchorX":0.5},"compId":2,"child":[{"type":"Animation","props":{"y":136.5,"x":136,"source":"scene/texiao/gongji.ani","scaleY":2,"scaleX":2},"compId":4}],"loadList":["scene/texiao/gongji.ani"],"loadList3D":[]}

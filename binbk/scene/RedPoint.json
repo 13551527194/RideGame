@@ -1,0 +1,1 @@
+{"type":"View","props":{"width":50,"height":50},"compId":2,"child":[{"type":"Sprite","props":{"y":0,"x":0,"texture":"sence/hongdian.png"},"compId":3}],"loadList":["sence/hongdian.png"],"loadList3D":[]}

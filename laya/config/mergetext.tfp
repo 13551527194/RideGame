@@ -1,0 +1,1173 @@
+{
+    "path": "D:\\Knight2.2\\bin",
+    "outPath": "bin",
+    "jsonSuffixList": [
+        "json",
+        "atlas",
+        "ani"
+    ],
+    "package": {
+        "all.plf": {
+            "scene/monsterAni/20001.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20002.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20003.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20004.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20005.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20006.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20007.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20008.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20009.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20010.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20011.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20012.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20013.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20014.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20015.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20016.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20017.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20018.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20019.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20020.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20021.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20022.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20023.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20024.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20025.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20026.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20027.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20028.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20029.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20030.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20031.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20032.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20033.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20034.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20035.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20036.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20037.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20038.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20039.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20040.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20041.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20042.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20043.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20044.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20045.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20046.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20047.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20048.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20049.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20050.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20051.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20052.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20053.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20054.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20055.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20056.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20057.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20058.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20059.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20060.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20061.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20062.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20063.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20064.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20065.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20066.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20067.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20068.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20068_1.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20069.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20070.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20071.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20072.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20073.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20074.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20075.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20076.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20077.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20078.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20079.ani": {
+                "type": "json"
+            },
+            "scene/monsterAni/20080.ani": {
+                "type": "json"
+            },
+            "scene/texiao/gongji.ani": {
+                "type": "json"
+            },
+            "scene/texiao/jiabaoji.ani": {
+                "type": "json"
+            },
+            "scene/texiao/jiafangyu.ani": {
+                "type": "json"
+            },
+            "scene/texiao/jiagongji.ani": {
+                "type": "json"
+            },
+            "scene/texiao/jiasudu.ani": {
+                "type": "json"
+            },
+            "scene/texiao/jiaxue.ani": {
+                "type": "json"
+            },
+            "scene/AdBtnView.json": {
+                "type": "json"
+            },
+            "scene/AddHpDisplay.json": {
+                "type": "json"
+            },
+            "scene/AdMergeDialog.json": {
+                "type": "json"
+            },
+            "scene/Attack2.json": {
+                "type": "json"
+            },
+            "scene/BagListCell.json": {
+                "type": "json"
+            },
+            "scene/BattleRes.json": {
+                "type": "json"
+            },
+            "scene/BattleScene.json": {
+                "type": "json"
+            },
+            "scene/Boss1View.json": {
+                "type": "json"
+            },
+            "scene/Boss2Atk1.json": {
+                "type": "json"
+            },
+            "scene/Boss2Atk2.json": {
+                "type": "json"
+            },
+            "scene/Boss2Dao.json": {
+                "type": "json"
+            },
+            "scene/Boss2View.json": {
+                "type": "json"
+            },
+            "scene/BossFireBall.json": {
+                "type": "json"
+            },
+            "scene/BossFireBoom.json": {
+                "type": "json"
+            },
+            "scene/BossStageView.json": {
+                "type": "json"
+            },
+            "scene/BufferLayer.json": {
+                "type": "json"
+            },
+            "scene/cheng6.json": {
+                "type": "json"
+            },
+            "scene/chengsan.json": {
+                "type": "json"
+            },
+            "scene/chengshi.json": {
+                "type": "json"
+            },
+            "scene/dabaoxiang.json": {
+                "type": "json"
+            },
+            "scene/daguaishou.json": {
+                "type": "json"
+            },
+            "scene/DropBuff.json": {
+                "type": "json"
+            },
+            "scene/DropItem.json": {
+                "type": "json"
+            },
+            "scene/ErrorTips.json": {
+                "type": "json"
+            },
+            "scene/feibaoxiang.json": {
+                "type": "json"
+            },
+            "scene/FlyBox.json": {
+                "type": "json"
+            },
+            "scene/GetGoldDialog.json": {
+                "type": "json"
+            },
+            "scene/GetItemDialog.json": {
+                "type": "json"
+            },
+            "scene/GetItemView.json": {
+                "type": "json"
+            },
+            "scene/GrilView.json": {
+                "type": "json"
+            },
+            "scene/hecheng.json": {
+                "type": "json"
+            },
+            "scene/hechengxuanzhong.json": {
+                "type": "json"
+            },
+            "scene/HitEffectView.json": {
+                "type": "json"
+            },
+            "scene/hongquan.json": {
+                "type": "json"
+            },
+            "scene/hongtan.json": {
+                "type": "json"
+            },
+            "scene/jiabaoji.json": {
+                "type": "json"
+            },
+            "scene/jiafangyu.json": {
+                "type": "json"
+            },
+            "scene/jiagong.json": {
+                "type": "json"
+            },
+            "scene/jiasudu.json": {
+                "type": "json"
+            },
+            "scene/KillBossDialog.json": {
+                "type": "json"
+            },
+            "scene/LightView.json": {
+                "type": "json"
+            },
+            "scene/loading.json": {
+                "type": "json"
+            },
+            "scene/Loading2.json": {
+                "type": "json"
+            },
+            "scene/LoadView.json": {
+                "type": "json"
+            },
+            "scene/MainScene.json": {
+                "type": "json"
+            },
+            "scene/MainScene_1.json": {
+                "type": "json"
+            },
+            "scene/maozhuangbei.json": {
+                "type": "json"
+            },
+            "scene/MergeFailEffectView.json": {
+                "type": "json"
+            },
+            "scene/MergeShareDialog.json": {
+                "type": "json"
+            },
+            "scene/MonsterBloodView.json": {
+                "type": "json"
+            },
+            "scene/MonsterView.json": {
+                "type": "json"
+            },
+            "scene/NBbaoxiang.json": {
+                "type": "json"
+            },
+            "scene/new.json": {
+                "type": "json"
+            },
+            "scene/NewerScene.json": {
+                "type": "json"
+            },
+            "scene/newhand.json": {
+                "type": "json"
+            },
+            "scene/player.json": {
+                "type": "json"
+            },
+            "scene/playerAni.json": {
+                "type": "json"
+            },
+            "scene/PlayerView.json": {
+                "type": "json"
+            },
+            "scene/PTbaoxiang.json": {
+                "type": "json"
+            },
+            "scene/RankCell.json": {
+                "type": "json"
+            },
+            "scene/RankDialog.json": {
+                "type": "json"
+            },
+            "scene/RankInfoDialog.json": {
+                "type": "json"
+            },
+            "scene/RedFlash.json": {
+                "type": "json"
+            },
+            "scene/RedPoint.json": {
+                "type": "json"
+            },
+            "scene/RedPointView.json": {
+                "type": "json"
+            },
+            "scene/RoleDialog.json": {
+                "type": "json"
+            },
+            "scene/sanjiao.json": {
+                "type": "json"
+            },
+            "scene/SelectStage2.json": {
+                "type": "json"
+            },
+            "scene/SelectStage3.json": {
+                "type": "json"
+            },
+            "scene/SelectStageDialog.json": {
+                "type": "json"
+            },
+            "scene/SellDialog.json": {
+                "type": "json"
+            },
+            "scene/SettingDialog.json": {
+                "type": "json"
+            },
+            "scene/shengli.json": {
+                "type": "json"
+            },
+            "scene/Stage1View.json": {
+                "type": "json"
+            },
+            "scene/Stage2View.json": {
+                "type": "json"
+            },
+            "scene/Stage3Ani.json": {
+                "type": "json"
+            },
+            "scene/Stage3View.json": {
+                "type": "json"
+            },
+            "scene/StageView.json": {
+                "type": "json"
+            },
+            "scene/TaskCell.json": {
+                "type": "json"
+            },
+            "scene/TaskDialog.json": {
+                "type": "json"
+            },
+            "scene/TestLogin.json": {
+                "type": "json"
+            },
+            "scene/TianFuDialog.json": {
+                "type": "json"
+            },
+            "scene/TimeGold.json": {
+                "type": "json"
+            },
+            "scene/TimeLogo.json": {
+                "type": "json"
+            },
+            "scene/TreasureDialog.json": {
+                "type": "json"
+            },
+            "scene/xiaoguai.json": {
+                "type": "json"
+            },
+            "scene/Zhuan.json": {
+                "type": "json"
+            },
+            "scene/ZhuanCell.json": {
+                "type": "json"
+            },
+            "scene/ZJbaoxiang.json": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20001.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20002.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20003.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20004.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20005.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20006.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20007.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20008.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20009.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20010.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20011.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20012.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20013.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20014.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20015.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20016.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20017.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20018.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20019.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20020.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20021.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20022.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20023.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20024.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20025.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20026.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20027.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20028.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20029.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20030.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20031.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20032.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20033.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20034.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20035.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20036.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20037.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20038.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20039.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20040.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20041.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20042.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20043.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20044.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20045.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20046.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20047.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20048.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20049.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20050.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20051.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20052.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20053.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20054.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20055.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20056.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20057.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20058.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20059.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20060.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20061.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20062.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20063.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20064.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20065.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20066.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20067.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20068.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20069.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20070.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20071.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20072.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20073.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20074.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20075.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20076.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20077.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20078.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20079.atlas": {
+                "type": "json"
+            },
+            "res/atlas/monsterAni/20080.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/all.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/equip.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/head.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/horse.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/pet.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/tou.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/weapon.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/weaponeffect.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player/新建文件夹.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/gongji.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/jiabaoji.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/jiafangyu.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/jiagongji.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/jiasudu.atlas": {
+                "type": "json"
+            },
+            "res/atlas/texiao/jiaxue.atlas": {
+                "type": "json"
+            },
+            "res/atlas/baoxiang.atlas": {
+                "type": "json"
+            },
+            "res/atlas/battlescene.atlas": {
+                "type": "json"
+            },
+            "res/atlas/comp.atlas": {
+                "type": "json"
+            },
+            "res/atlas/dabaoxiang.atlas": {
+                "type": "json"
+            },
+            "res/atlas/flybox.atlas": {
+                "type": "json"
+            },
+            "res/atlas/girl.atlas": {
+                "type": "json"
+            },
+            "res/atlas/loading.atlas": {
+                "type": "json"
+            },
+            "res/atlas/mainscene.atlas": {
+                "type": "json"
+            },
+            "res/atlas/newhand.atlas": {
+                "type": "json"
+            },
+            "res/atlas/player.atlas": {
+                "type": "json"
+            },
+            "res/atlas/qiandao.atlas": {
+                "type": "json"
+            },
+            "res/atlas/rank.atlas": {
+                "type": "json"
+            },
+            "res/atlas/renwu.atlas": {
+                "type": "json"
+            },
+            "res/atlas/resselectstage.atlas": {
+                "type": "json"
+            },
+            "res/atlas/sence.atlas": {
+                "type": "json"
+            },
+            "res/atlas/setdialog.atlas": {
+                "type": "json"
+            },
+            "res/atlas/shengli.atlas": {
+                "type": "json"
+            },
+            "res/atlas/tianfu.atlas": {
+                "type": "json"
+            }
+        }
+    },
+    "fileMerge": {
+        "all.plf": [
+            "scene/monsterAni/20001.ani",
+            "scene/monsterAni/20002.ani",
+            "scene/monsterAni/20003.ani",
+            "scene/monsterAni/20004.ani",
+            "scene/monsterAni/20005.ani",
+            "scene/monsterAni/20006.ani",
+            "scene/monsterAni/20007.ani",
+            "scene/monsterAni/20008.ani",
+            "scene/monsterAni/20009.ani",
+            "scene/monsterAni/20010.ani",
+            "scene/monsterAni/20011.ani",
+            "scene/monsterAni/20012.ani",
+            "scene/monsterAni/20013.ani",
+            "scene/monsterAni/20014.ani",
+            "scene/monsterAni/20015.ani",
+            "scene/monsterAni/20016.ani",
+            "scene/monsterAni/20017.ani",
+            "scene/monsterAni/20018.ani",
+            "scene/monsterAni/20019.ani",
+            "scene/monsterAni/20020.ani",
+            "scene/monsterAni/20021.ani",
+            "scene/monsterAni/20022.ani",
+            "scene/monsterAni/20023.ani",
+            "scene/monsterAni/20024.ani",
+            "scene/monsterAni/20025.ani",
+            "scene/monsterAni/20026.ani",
+            "scene/monsterAni/20027.ani",
+            "scene/monsterAni/20028.ani",
+            "scene/monsterAni/20029.ani",
+            "scene/monsterAni/20030.ani",
+            "scene/monsterAni/20031.ani",
+            "scene/monsterAni/20032.ani",
+            "scene/monsterAni/20033.ani",
+            "scene/monsterAni/20034.ani",
+            "scene/monsterAni/20035.ani",
+            "scene/monsterAni/20036.ani",
+            "scene/monsterAni/20037.ani",
+            "scene/monsterAni/20038.ani",
+            "scene/monsterAni/20039.ani",
+            "scene/monsterAni/20040.ani",
+            "scene/monsterAni/20041.ani",
+            "scene/monsterAni/20042.ani",
+            "scene/monsterAni/20043.ani",
+            "scene/monsterAni/20044.ani",
+            "scene/monsterAni/20045.ani",
+            "scene/monsterAni/20046.ani",
+            "scene/monsterAni/20047.ani",
+            "scene/monsterAni/20048.ani",
+            "scene/monsterAni/20049.ani",
+            "scene/monsterAni/20050.ani",
+            "scene/monsterAni/20051.ani",
+            "scene/monsterAni/20052.ani",
+            "scene/monsterAni/20053.ani",
+            "scene/monsterAni/20054.ani",
+            "scene/monsterAni/20055.ani",
+            "scene/monsterAni/20056.ani",
+            "scene/monsterAni/20057.ani",
+            "scene/monsterAni/20058.ani",
+            "scene/monsterAni/20059.ani",
+            "scene/monsterAni/20060.ani",
+            "scene/monsterAni/20061.ani",
+            "scene/monsterAni/20062.ani",
+            "scene/monsterAni/20063.ani",
+            "scene/monsterAni/20064.ani",
+            "scene/monsterAni/20065.ani",
+            "scene/monsterAni/20066.ani",
+            "scene/monsterAni/20067.ani",
+            "scene/monsterAni/20068.ani",
+            "scene/monsterAni/20068_1.ani",
+            "scene/monsterAni/20069.ani",
+            "scene/monsterAni/20070.ani",
+            "scene/monsterAni/20071.ani",
+            "scene/monsterAni/20072.ani",
+            "scene/monsterAni/20073.ani",
+            "scene/monsterAni/20074.ani",
+            "scene/monsterAni/20075.ani",
+            "scene/monsterAni/20076.ani",
+            "scene/monsterAni/20077.ani",
+            "scene/monsterAni/20078.ani",
+            "scene/monsterAni/20079.ani",
+            "scene/monsterAni/20080.ani",
+            "scene/texiao/gongji.ani",
+            "scene/texiao/jiabaoji.ani",
+            "scene/texiao/jiafangyu.ani",
+            "scene/texiao/jiagongji.ani",
+            "scene/texiao/jiasudu.ani",
+            "scene/texiao/jiaxue.ani",
+            "scene/AdBtnView.json",
+            "scene/AddHpDisplay.json",
+            "scene/AdMergeDialog.json",
+            "scene/Attack2.json",
+            "scene/BagListCell.json",
+            "scene/BattleRes.json",
+            "scene/BattleScene.json",
+            "scene/Boss1View.json",
+            "scene/Boss2Atk1.json",
+            "scene/Boss2Atk2.json",
+            "scene/Boss2Dao.json",
+            "scene/Boss2View.json",
+            "scene/BossFireBall.json",
+            "scene/BossFireBoom.json",
+            "scene/BossStageView.json",
+            "scene/BufferLayer.json",
+            "scene/cheng6.json",
+            "scene/chengsan.json",
+            "scene/chengshi.json",
+            "scene/dabaoxiang.json",
+            "scene/daguaishou.json",
+            "scene/DropBuff.json",
+            "scene/DropItem.json",
+            "scene/ErrorTips.json",
+            "scene/feibaoxiang.json",
+            "scene/FlyBox.json",
+            "scene/GetGoldDialog.json",
+            "scene/GetItemDialog.json",
+            "scene/GetItemView.json",
+            "scene/GrilView.json",
+            "scene/hecheng.json",
+            "scene/hechengxuanzhong.json",
+            "scene/HitEffectView.json",
+            "scene/hongquan.json",
+            "scene/hongtan.json",
+            "scene/jiabaoji.json",
+            "scene/jiafangyu.json",
+            "scene/jiagong.json",
+            "scene/jiasudu.json",
+            "scene/KillBossDialog.json",
+            "scene/LightView.json",
+            "scene/loading.json",
+            "scene/Loading2.json",
+            "scene/LoadView.json",
+            "scene/MainScene.json",
+            "scene/MainScene_1.json",
+            "scene/maozhuangbei.json",
+            "scene/MergeFailEffectView.json",
+            "scene/MergeShareDialog.json",
+            "scene/MonsterBloodView.json",
+            "scene/MonsterView.json",
+            "scene/NBbaoxiang.json",
+            "scene/new.json",
+            "scene/NewerScene.json",
+            "scene/newhand.json",
+            "scene/player.json",
+            "scene/playerAni.json",
+            "scene/PlayerView.json",
+            "scene/PTbaoxiang.json",
+            "scene/RankCell.json",
+            "scene/RankDialog.json",
+            "scene/RankInfoDialog.json",
+            "scene/RedFlash.json",
+            "scene/RedPoint.json",
+            "scene/RedPointView.json",
+            "scene/RoleDialog.json",
+            "scene/sanjiao.json",
+            "scene/SelectStage2.json",
+            "scene/SelectStage3.json",
+            "scene/SelectStageDialog.json",
+            "scene/SellDialog.json",
+            "scene/SettingDialog.json",
+            "scene/shengli.json",
+            "scene/Stage1View.json",
+            "scene/Stage2View.json",
+            "scene/Stage3Ani.json",
+            "scene/Stage3View.json",
+            "scene/StageView.json",
+            "scene/TaskCell.json",
+            "scene/TaskDialog.json",
+            "scene/TestLogin.json",
+            "scene/TianFuDialog.json",
+            "scene/TimeGold.json",
+            "scene/TimeLogo.json",
+            "scene/TreasureDialog.json",
+            "scene/xiaoguai.json",
+            "scene/Zhuan.json",
+            "scene/ZhuanCell.json",
+            "scene/ZJbaoxiang.json",
+            "res/atlas/monsterAni/20001.atlas",
+            "res/atlas/monsterAni/20002.atlas",
+            "res/atlas/monsterAni/20003.atlas",
+            "res/atlas/monsterAni/20004.atlas",
+            "res/atlas/monsterAni/20005.atlas",
+            "res/atlas/monsterAni/20006.atlas",
+            "res/atlas/monsterAni/20007.atlas",
+            "res/atlas/monsterAni/20008.atlas",
+            "res/atlas/monsterAni/20009.atlas",
+            "res/atlas/monsterAni/20010.atlas",
+            "res/atlas/monsterAni/20011.atlas",
+            "res/atlas/monsterAni/20012.atlas",
+            "res/atlas/monsterAni/20013.atlas",
+            "res/atlas/monsterAni/20014.atlas",
+            "res/atlas/monsterAni/20015.atlas",
+            "res/atlas/monsterAni/20016.atlas",
+            "res/atlas/monsterAni/20017.atlas",
+            "res/atlas/monsterAni/20018.atlas",
+            "res/atlas/monsterAni/20019.atlas",
+            "res/atlas/monsterAni/20020.atlas",
+            "res/atlas/monsterAni/20021.atlas",
+            "res/atlas/monsterAni/20022.atlas",
+            "res/atlas/monsterAni/20023.atlas",
+            "res/atlas/monsterAni/20024.atlas",
+            "res/atlas/monsterAni/20025.atlas",
+            "res/atlas/monsterAni/20026.atlas",
+            "res/atlas/monsterAni/20027.atlas",
+            "res/atlas/monsterAni/20028.atlas",
+            "res/atlas/monsterAni/20029.atlas",
+            "res/atlas/monsterAni/20030.atlas",
+            "res/atlas/monsterAni/20031.atlas",
+            "res/atlas/monsterAni/20032.atlas",
+            "res/atlas/monsterAni/20033.atlas",
+            "res/atlas/monsterAni/20034.atlas",
+            "res/atlas/monsterAni/20035.atlas",
+            "res/atlas/monsterAni/20036.atlas",
+            "res/atlas/monsterAni/20037.atlas",
+            "res/atlas/monsterAni/20038.atlas",
+            "res/atlas/monsterAni/20039.atlas",
+            "res/atlas/monsterAni/20040.atlas",
+            "res/atlas/monsterAni/20041.atlas",
+            "res/atlas/monsterAni/20042.atlas",
+            "res/atlas/monsterAni/20043.atlas",
+            "res/atlas/monsterAni/20044.atlas",
+            "res/atlas/monsterAni/20045.atlas",
+            "res/atlas/monsterAni/20046.atlas",
+            "res/atlas/monsterAni/20047.atlas",
+            "res/atlas/monsterAni/20048.atlas",
+            "res/atlas/monsterAni/20049.atlas",
+            "res/atlas/monsterAni/20050.atlas",
+            "res/atlas/monsterAni/20051.atlas",
+            "res/atlas/monsterAni/20052.atlas",
+            "res/atlas/monsterAni/20053.atlas",
+            "res/atlas/monsterAni/20054.atlas",
+            "res/atlas/monsterAni/20055.atlas",
+            "res/atlas/monsterAni/20056.atlas",
+            "res/atlas/monsterAni/20057.atlas",
+            "res/atlas/monsterAni/20058.atlas",
+            "res/atlas/monsterAni/20059.atlas",
+            "res/atlas/monsterAni/20060.atlas",
+            "res/atlas/monsterAni/20061.atlas",
+            "res/atlas/monsterAni/20062.atlas",
+            "res/atlas/monsterAni/20063.atlas",
+            "res/atlas/monsterAni/20064.atlas",
+            "res/atlas/monsterAni/20065.atlas",
+            "res/atlas/monsterAni/20066.atlas",
+            "res/atlas/monsterAni/20067.atlas",
+            "res/atlas/monsterAni/20068.atlas",
+            "res/atlas/monsterAni/20069.atlas",
+            "res/atlas/monsterAni/20070.atlas",
+            "res/atlas/monsterAni/20071.atlas",
+            "res/atlas/monsterAni/20072.atlas",
+            "res/atlas/monsterAni/20073.atlas",
+            "res/atlas/monsterAni/20074.atlas",
+            "res/atlas/monsterAni/20075.atlas",
+            "res/atlas/monsterAni/20076.atlas",
+            "res/atlas/monsterAni/20077.atlas",
+            "res/atlas/monsterAni/20078.atlas",
+            "res/atlas/monsterAni/20079.atlas",
+            "res/atlas/monsterAni/20080.atlas",
+            "res/atlas/player/all.atlas",
+            "res/atlas/player/equip.atlas",
+            "res/atlas/player/head.atlas",
+            "res/atlas/player/horse.atlas",
+            "res/atlas/player/pet.atlas",
+            "res/atlas/player/tou.atlas",
+            "res/atlas/player/weapon.atlas",
+            "res/atlas/player/weaponeffect.atlas",
+            "res/atlas/player/新建文件夹.atlas",
+            "res/atlas/texiao/gongji.atlas",
+            "res/atlas/texiao/jiabaoji.atlas",
+            "res/atlas/texiao/jiafangyu.atlas",
+            "res/atlas/texiao/jiagongji.atlas",
+            "res/atlas/texiao/jiasudu.atlas",
+            "res/atlas/texiao/jiaxue.atlas",
+            "res/atlas/baoxiang.atlas",
+            "res/atlas/battlescene.atlas",
+            "res/atlas/comp.atlas",
+            "res/atlas/dabaoxiang.atlas",
+            "res/atlas/flybox.atlas",
+            "res/atlas/girl.atlas",
+            "res/atlas/loading.atlas",
+            "res/atlas/mainscene.atlas",
+            "res/atlas/newhand.atlas",
+            "res/atlas/player.atlas",
+            "res/atlas/qiandao.atlas",
+            "res/atlas/rank.atlas",
+            "res/atlas/renwu.atlas",
+            "res/atlas/resselectstage.atlas",
+            "res/atlas/sence.atlas",
+            "res/atlas/setdialog.atlas",
+            "res/atlas/shengli.atlas",
+            "res/atlas/tianfu.atlas"
+        ]
+    }
+}

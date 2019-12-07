@@ -1,0 +1,13 @@
+{
+    "package": "com.ntx.qima",
+    "name": "骑马合成",
+    "versionName": "1.0",
+    "versionCode": 1,
+    "minPlatformVersion": 1050,
+    "icon": "./icon.png",
+    "orientation": "portrait",
+    "type": "game",
+    "config": {
+        "logLevel": "off"
+    }
+}

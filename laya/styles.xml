@@ -1,0 +1,33 @@
+<res>
+   <item name="sence/caidai1.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="sence/caidai2.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="monsterAni/20034" type="" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="sence/jiazai.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="player/horse" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="player/head" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="player/equip" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="player/tou" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="player/weapon" type="" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="icons" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="shengli/shenglibu.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="shengli/guangzhuan.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="sence/clip_he.png" type="Clip" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/shuxianglan.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="loading/penhuo.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="loading/loadzi.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="loading/hongren.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/bg0.jpg" type="Sprite" compress="0" pack="0" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/xuetiaodi.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/xuetiaoding.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/xuetiaodingbai.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/xuetiaochunbai.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="shengli/guangzhuan1.png" type="Sprite" compress="0" pack="0" quality="80" props="" picType="1" scale="0"/>
+   <item name="battlescene/clip_jiabaoji.png" type="Clip" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/bg1.jpg" type="Sprite" compress="0" pack="0" quality="80" props="" picType="1" scale="0"/>
+   <item name="monsterAni/20034/hongdian.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="girl/waitme.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="sence/fazhen.png" type="Sprite" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/laixiBG1.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="battlescene/laixiBG2.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="loading/shan.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+</res>
