@@ -32,7 +32,7 @@ export default class DataSession extends Session{
     public static QQ:number = 2;
     public static DOUYIN:number = 3;
     
-    public static GAME_VER:string = "1.0.0";
+    public static GAME_VER:string = "5.0.0";
     public static START_TIME:number = 0;
     
     public static ONLY_ID:number = Math.random();
@@ -65,13 +65,13 @@ export default class DataSession extends Session{
         }
     }
 
-    public loginFun():void {
-        if( MyConfig.PLATFORM == DataSession.WX ){
+    public loginFun():void { 
+        //if( MyConfig.PLATFORM == DataSession.WX ){
             Laya.Scene.showLoadingPage();
 			this.loginWXServer();
-		}else{
-			App.getInstance().openScene( MyGameInit.TestScene );
-		}
+		//}else{
+			//App.getInstance().openScene( MyGameInit.TestScene );
+		//}
     }
 
     public loginWXServer():void{
@@ -79,15 +79,23 @@ export default class DataSession extends Session{
         obj.success = ( res:Object )=>{
             this.loginMyServer(res);
         }
-        Laya.Browser.window.wx.login( obj );
+        //if( Laya.Browser.onQGMiniGame ){
+            Laya.Browser.window.wx.login( obj );   
+        // }else{
+        //     Laya.Browser.window.wx.login( obj );
+        // }
     }
 
     public loginMyServer( res:any ):void{
-        if( res.code ){
+        let j = JSON.stringify(res.data);
+        
+        if( res.token ){
             var http = new Laya.HttpRequest();
-            let url:string = MyConfig.IP + "gamex2/login";
-            let httpdata:string = "scode=" + MyConfig.PLATFORM + "&jscode=" + res.code;
-            http.send( url,httpdata ,"post" );
+            //let url:string = MyConfig.IP + "gamex2/login";
+            let url:string = "https://game.kuwan511.com/gamelogin/login"
+            let httpdata:string = "scode=" + 3 + "&jscode=" + res.token;
+            http.send( url + "?" + httpdata  , null  ,"GET" );
+            //console.log( httpdata );
             http.once( Laya.Event.COMPLETE , this , this.loginMyServerFun ,[http] );
             http.once( Laya.Event.ERROR , this , this.loginErrorFun  ,[http] );
             http.once( Laya.Event.PROGRESS ,this, this.loginProFun  ,[http] );
@@ -106,9 +114,14 @@ export default class DataSession extends Session{
 
     public saveKey:string;
 
-    public loginMyServerFun(http:Laya.HttpRequest , saveKey:string ):void{
+    public loginMyServerFun(http:Laya.HttpRequest , saveKey:any ):void{
         //记录每个http登陆的状态
-        this.saveKey = saveKey;
+        //console.log("ccccccccccc" ,  saveKey );
+        let j:any = JSON.parse(saveKey);
+        //console.log( "dddd" , saveKey.userInfo.userId );
+        console.log("eeee" , j );
+        this.saveKey = j.userInfo.userId;
+        //console.log( this.saveKey );
         this.startHeart();
         this.requestData();
         this.loginLogStatus( http.http.status );
@@ -123,12 +136,16 @@ export default class DataSession extends Session{
      * 这个一般就登陆时请求一次
      */
     public requestData():void{
-        App.http( MyConfig.IP + "gamex2/gamedata" ,"skey=" + this.saveKey  ,"post",this,this.requestDataFun  );
+        //App.http( MyConfig.IP + "gamex2/gamedata" ,"skey=" + this.saveKey  ,"post",this,this.requestDataFun  );
+        App.http( "https://game.kuwan511.com/game/get" , "skey=" + this.saveKey , "GET" , this, this.requestDataFun );
     }
 
     public requestDataFun( str:string ):void{
+
+        console.log("得到数据" + str );
+
         this.dataIsInit = true;
-        if( str == "0" || str == "" ){
+        if( str == "{}" || str == "" ){
             //新玩家
             this.log( LogType.NEW_PLAYER , this.saveKey );
             App.sendEvent( MyEvent.NEWER_INIT );
@@ -148,10 +165,11 @@ export default class DataSession extends Session{
     }
 
     public requestSaveData( isImportant:boolean = false ){
+        let url:string = "https://game.kuwan511.com/game/save";//?skey=abc&gamedata=
         if( isImportant ){
-            App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=1&num=" + this.jsonObj.stageNum ,"post",this,this.requestSaveDataFun  );    
+            App.http( url , "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=1&num=" + this.jsonObj.stageNum ,"post",this,this.requestSaveDataFun  );    
         }else{
-            App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=0&num=0","post",this,this.requestSaveDataFun  );    
+            App.http( url , "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=0&num=0","post",this,this.requestSaveDataFun  );    
         }
     }
 
@@ -230,6 +248,8 @@ export default class DataSession extends Session{
         
         this.sdkSession.shareTime = this.jsonObj.shareTime?this.jsonObj.shareTime:0;
         this.sdkSession.shareTimes = this.jsonObj.shareTimes?this.jsonObj.shareTimes:0;
+        this.sdkSession.insertTimes = this.jsonObj.insertTimes?this.jsonObj.insertTimes:0;
+        this.sdkSession.bannerTimes = this.jsonObj.bannerTimes?this.jsonObj.bannerTimes:0;
 
         this.tianFuSession.setLvString( this.getString( this.jsonObj.talentStr ) );
         this.tianFuSession.lvTimes = this.getNumber( this.jsonObj.talentLv );
@@ -316,6 +336,9 @@ export default class DataSession extends Session{
         this.jsonObj.shareTime = this.sdkSession.shareTime;
         this.jsonObj.shareTimes = this.sdkSession.shareTimes;
 
+        this.jsonObj.bannerTimes = this.sdkSession.bannerTimes;
+        this.jsonObj.insertTimes = this.sdkSession.insertTimes;
+
         this.jsonObj.talentStr = this.tianFuSession.getLvString();
         this.jsonObj.talentLv = this.tianFuSession.lvTimes;
 
@@ -338,41 +361,41 @@ export default class DataSession extends Session{
     }
 
     public log( type:number , content:string = "" ):void {
-        console.log( "log" + type );
-        var arr:Array<any> = [];
-        arr.push( Laya.Browser.now() );
-        arr.push( DataSession.GAME_VER );
-        arr.push( this.saveKey );
-        arr.push( MyConfig.PLATFORM );
-        arr.push( DataSession.ONLY_ID );
-        arr.push( type );
-        arr.push( content );
-        arr.push( this.sdkSession.wxName );
-        let str = arr.join( "\t" );
-        // var str:String = "";
-        // for( var i:number = 0; i < arr.length; i++ ){
-        //     str += ( arr[i] + "\t" );
-        // }
-        App.http( MyConfig.IP + "gamex2/gamelog" ,"log=" + str ,"post" );
+        // console.log( "log" + type );
+        // var arr:Array<any> = [];
+        // arr.push( Laya.Browser.now() );
+        // arr.push( DataSession.GAME_VER );
+        // arr.push( this.saveKey );
+        // arr.push( MyConfig.PLATFORM );
+        // arr.push( DataSession.ONLY_ID );
+        // arr.push( type );
+        // arr.push( content );
+        // arr.push( this.sdkSession.wxName );
+        // let str = arr.join( "\t" );
+        // // var str:String = "";
+        // // for( var i:number = 0; i < arr.length; i++ ){
+        // //     str += ( arr[i] + "\t" );
+        // // }
+        // App.http( MyConfig.IP + "gamex2/gamelog" ,"log=" + str ,"post" );
     }
 
     public static staticLog( type:number , content:string = "" ):void{
-        if( Laya.Browser.onMiniGame == false ){
-            return;
-        }
-        var arr:Array<any> = [];
-        arr.push( Laya.Browser.now() );
-        arr.push( DataSession.GAME_VER );
-        arr.push( "have no savekey" );
-        arr.push( 1 );
-        arr.push( DataSession.ONLY_ID );
-        arr.push( type );
-        arr.push( content );
-        var str:String = "";
-        for( var i:number = 0; i < arr.length; i++ ){
-            str+=( arr[i] + "\t" );
-        }
-        App.http( "https://st.kuwan511.com/gamex2/gamelog" ,"log=" + str ,"post" );
+        // if( Laya.Browser.onMiniGame == false ){
+        //     return;
+        // }
+        // var arr:Array<any> = [];
+        // arr.push( Laya.Browser.now() );
+        // arr.push( DataSession.GAME_VER );
+        // arr.push( "have no savekey" );
+        // arr.push( 1 );
+        // arr.push( DataSession.ONLY_ID );
+        // arr.push( type );
+        // arr.push( content );
+        // var str:String = "";
+        // for( var i:number = 0; i < arr.length; i++ ){
+        //     str+=( arr[i] + "\t" );
+        // }
+        // App.http( "https://st.kuwan511.com/gamex2/gamelog" ,"log=" + str ,"post" );
     }
 
     public saveRank():void {

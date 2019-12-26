@@ -41,6 +41,14 @@ export default class MainSceneMediator extends Mediator{
         this.mainScene = <any>sprite;
         this.mainScene.height = Laya.stage.height;
         this.mainScene.timeLogo.on(Laya.Event.CLICK,this,this.timeLogoFun);
+        this.mainScene.rankBtn.visible = false;
+        this.mainScene.shareBtn.visible = false;
+        this.mainScene.rightBox.visible = false;
+        
+        this.mainScene.settingBtn.scale(1.5,1.5);
+        this.mainScene.addChild(this.mainScene.settingBtn);
+        this.mainScene.settingBtn.x = 20;
+        this.mainScene.settingBtn.y = 300;
     }
 
     public timeLogoFun():void{

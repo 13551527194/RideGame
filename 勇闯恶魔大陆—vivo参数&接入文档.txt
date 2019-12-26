@@ -1,0 +1,12 @@
+﻿vivo对接教程：http://minigame.vivo.com.cn/documents/#/lesson/base/start
+
+vivo小游戏广告接入：（需小游戏上线后方可申请参数）
+https://minigame.vivo.com.cn/documents/#/lesson/open-ability/ad
+
+
+
+vivo参数
+包名：com.handarui.ycemdl.vivominigame
+Cp-ID：20160527164441264871
+App-ID：100003450
+App-key：1c9d509f8133505d2aa94a1bd680e7d1

@@ -103,9 +103,9 @@ export default class NewerSession extends Session{
     /**
      * 新手
      */
-    public static getHand():ui.scene.newhandUI{
+    public static getHand():ui.scene.newhand1UI {
         if( NewerSession.hand == null ){
-            NewerSession.hand = new ui.scene.newhandUI();
+            NewerSession.hand = new ui.scene.newhand1UI();
         }
         NewerSession.hand.lightClip.play();
         return NewerSession.hand;
@@ -124,5 +124,5 @@ export default class NewerSession extends Session{
         }
     }
 
-    public static hand:ui.scene.newhandUI = null;
+    public static hand:ui.scene.newhand1UI = null;
 }

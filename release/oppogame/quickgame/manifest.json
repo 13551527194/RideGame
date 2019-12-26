@@ -1,10 +1,10 @@
 {
-    "package": "com.ntx.qima",
-    "name": "骑马合成",
+    "package": "com.handarui.ycemdl.nearme.gamecenter",
+    "name": "勇闯恶魔大陆",
     "versionName": "1.0",
     "versionCode": 1,
     "minPlatformVersion": 1050,
-    "icon": "./icon.png",
+    "icon": "./logo.jpg",
     "orientation": "portrait",
     "type": "game",
     "config": {

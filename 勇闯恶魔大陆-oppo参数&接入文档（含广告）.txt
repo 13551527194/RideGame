@@ -1,0 +1,32 @@
+﻿oppo小游戏接入文档：https://cdofs.oppomobile.com/cdo-activity/static/201810/26/quickgame/documentation/games/use.html
+oppo小游戏广告接入文档：https://cdofs.oppomobile.com/cdo-activity/static/201810/26/quickgame/documentation/ad/ad.html
+
+
+勇闯恶魔大陆 oppo参数
+包名：com.handarui.ycemdl.nearme.gamecenter
+appid：30229896
+appkey： 2qR2054D53oKow4cKsc40gc8c(勿外泄)
+appsecret：a33F6e58836D4678E8d379c51FF93C57(勿外泄)
+
+
+oppo广告参数
+勇闯恶魔大陆   ID:30229896
+
+勇闯恶魔大陆-banner-游戏主页  ID: 146702
+勇闯恶魔大陆-banner-角色宝箱等  ID: 146703
+勇闯恶魔大陆-banner-选择关卡  ID: 146704
+勇闯恶魔大陆-banner-游戏过程  ID: 146705
+勇闯恶魔大陆-banner-关卡结算等  ID: 146706
+
+勇闯恶魔大陆-激励视频-获得金币  ID: 146710
+勇闯恶魔大陆-激励视频-任务奖励  ID: 146712 	
+勇闯恶魔大陆-激励视频-点击砸蛋  ID: 146713
+勇闯恶魔大陆-激励视频-王者宝箱  ID: 146714
+勇闯恶魔大陆-激励视频-双倍装备  ID: 146715
+勇闯恶魔大陆-激励视频-装备升级  ID: 146717
+勇闯恶魔大陆-激励视频-幸运宝箱  ID: 146718
+勇闯恶魔大陆-激励视频-10倍奖励  ID: 146721
+勇闯恶魔大陆-激励视频-BOSS击杀  ID: 146722
+
+勇闯恶魔大陆-插屏-关卡结算  ID: 146723
+勇闯恶魔大陆-插屏-炼任务     ID: 146724

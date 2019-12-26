@@ -1,0 +1,1 @@
+{"type":"View","props":{"width":2250,"height":1456},"compId":2,"child":[{"type":"Sprite","props":{"y":0,"x":0,"texture":"battlescene/bg1.jpg"},"compId":3},{"type":"Sprite","props":{"y":0,"x":750,"texture":"battlescene/bg1.jpg"},"compId":4},{"type":"Sprite","props":{"y":0,"x":1500,"texture":"battlescene/bg1.jpg"},"compId":5}],"loadList":["battlescene/bg1.jpg"],"loadList3D":[]}

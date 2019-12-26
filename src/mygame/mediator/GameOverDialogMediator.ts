@@ -73,14 +73,14 @@ export default class GameOverDialogMediator extends Mediator{
     }
 
     public next():void{
-        let id = this.battleSession.sys.nextId;
+        // let id = this.battleSession.sys.nextId;
         // if( id > 5 && id % 2 == 1 ){
         //     Laya.MouseManager.enabled = false;
-        //     //this.sdkSession.chaPingAd( SdkSession.NEXT_STAGE_CHAPING , new Laya.Handler( this, this.nextHandlerFun ) );            
+            this.sdkSession.chaPingAd( SdkSession.NEXT_STAGE_CHAPING , new Laya.Handler( this, this.nextHandlerFun ) );            
         //     this.nextHandlerFun();
         // }else{
-            this.nextHandlerFun();
-        //}
+        //     this.nextHandlerFun();
+        // }
     }
 
     public nextHandlerFun():void{

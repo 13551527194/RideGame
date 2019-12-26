@@ -48,7 +48,7 @@ export default class MergeShareMediator extends Mediator{
         this.dialog.v1.sharebox.visible = true;
         this.dialog.v1.adbox.visible = false;
         this.dialog.v1.AdBtn.clickHandler = new Laya.Handler( this,this.cFun );
-
+        this.dialog.v1.AdBtn.visible = false;
         this.dialog.v1.ani1.play(0,true);
     }
 

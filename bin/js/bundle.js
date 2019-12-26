@@ -43,12 +43,15 @@
             this.configMap = {};
         }
         init(arr) {
-            console.log("所有的配置表", arr.length);
-            for (var i = 0, len = arr.length; i < len; i++) {
+            for (var i = 0, len = arr.length; i < len; i += 2) {
                 var fileName = arr[i];
-                var fileContent = Laya.loader.getRes("config/" + fileName);
+                var fileContent = arr[i + 1];
                 var configData = this.configMap[fileName];
                 if (configData == null) {
+                    continue;
+                }
+                if (configData.analysisFun) {
+                    configData.analysisFun(fileContent);
                     continue;
                 }
                 configData.dataArray = this.analysisConfig(fileContent, configData.configClass);
@@ -443,13 +446,13 @@
             }
             disInstance.once(Laya.Event.UNDISPLAY, this, this.undisFun, [mInstance, url]);
             if (disInstance instanceof Laya.Dialog) {
+                disInstance.isShowEffect = false;
                 if (disInstance.isShowEffect == false) {
                     disInstance.popup(closeOther, false);
                 }
                 else {
                     disInstance.isShowEffect = false;
                     disInstance.open(closeOther);
-                    this.dialogEff(disInstance);
                 }
                 disInstance.url = url;
                 this.eventManager.event(GameEvent.OPEN_DIALOG, url);
@@ -627,6 +630,7 @@
                 url = url + "?" + data;
                 data = null;
             }
+            console.log("访问地址:" + url);
             http.send(url, data, method);
             if (caller && listener) {
                 http.once(Laya.Event.COMPLETE, caller, listener, args);
@@ -1229,16 +1233,16 @@
             NewerSceneUI.uiView = { "type": "View", "props": { "width": 750, "height": 1334 }, "compId": 2, "child": [{ "type": "Image", "props": { "y": 0, "x": 0, "var": "img1", "skin": "newhand/h1.jpg" }, "compId": 7, "child": [{ "type": "Image", "props": { "y": 1042, "x": 116, "skin": "newhand/t1.png" }, "compId": 11 }] }, { "type": "Image", "props": { "y": 0, "x": 0, "var": "img2", "skin": "newhand/h2.jpg" }, "compId": 12, "child": [{ "type": "Sprite", "props": { "y": 1007, "x": 20.5, "texture": "newhand/t2.png" }, "compId": 13 }] }, { "type": "Image", "props": { "x": 515, "var": "tiaoguo", "skin": "newhand/tiaoguo.png", "bottom": 10 }, "compId": 16 }], "loadList": ["newhand/h1.jpg", "newhand/t1.png", "newhand/h2.jpg", "newhand/t2.png", "newhand/tiaoguo.png"], "loadList3D": [] };
             scene.NewerSceneUI = NewerSceneUI;
             REG("ui.scene.NewerSceneUI", NewerSceneUI);
-            class newhandUI extends Laya.View {
+            class newhand1UI extends Laya.View {
                 constructor() { super(); }
                 createChildren() {
                     super.createChildren();
-                    this.createView(newhandUI.uiView);
+                    this.createView(newhand1UI.uiView);
                 }
             }
-            newhandUI.uiView = { "type": "View", "props": { "width": 100, "height": 100 }, "compId": 2, "child": [{ "type": "Clip", "props": { "y": -137, "x": -155, "var": "lightClip", "skin": "newhand/clip_guang.png", "scaleY": 2, "scaleX": 2, "clipY": 2, "clipX": 4, "blendMode": "lighter" }, "compId": 9 }, { "type": "Image", "props": { "y": 43, "x": 12, "skin": "girl/xiaoshou.png", "anchorY": 0.5, "anchorX": 0.5 }, "compId": 3 }], "animations": [{ "nodes": [{ "target": 3, "keyframes": { "scaleY": [{ "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleY", "index": 0 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleY", "index": 2 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleY", "index": 6 }, { "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleY", "index": 8 }], "scaleX": [{ "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleX", "index": 0 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleX", "index": 2 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleX", "index": 6 }, { "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleX", "index": 8 }], "rotation": [{ "value": 0, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "rotation", "index": 0 }, { "value": 0, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "rotation", "index": 8 }] } }], "name": "ani1", "id": 1, "frameRate": 24, "action": 0 }], "loadList": ["newhand/clip_guang.png", "girl/xiaoshou.png"], "loadList3D": [] };
-            scene.newhandUI = newhandUI;
-            REG("ui.scene.newhandUI", newhandUI);
+            newhand1UI.uiView = { "type": "View", "props": { "width": 100, "height": 100 }, "compId": 2, "child": [{ "type": "Clip", "props": { "y": -137, "x": -155, "var": "lightClip", "skin": "newhand/clip_guang.png", "scaleY": 2, "scaleX": 2, "clipY": 2, "clipX": 4, "blendMode": "lighter" }, "compId": 9 }, { "type": "Image", "props": { "y": 43, "x": 12, "skin": "girl/xiaoshou.png", "anchorY": 0.5, "anchorX": 0.5 }, "compId": 3 }], "animations": [{ "nodes": [{ "target": 3, "keyframes": { "scaleY": [{ "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleY", "index": 0 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleY", "index": 2 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleY", "index": 6 }, { "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleY", "index": 8 }], "scaleX": [{ "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleX", "index": 0 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "scaleX", "index": 2 }, { "value": 0.8, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleX", "index": 6 }, { "value": 1, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "scaleX", "index": 8 }], "rotation": [{ "value": 0, "tweenMethod": "linearNone", "tween": true, "target": 3, "key": "rotation", "index": 0 }, { "value": 0, "tweenMethod": "linearNone", "tween": true, "target": 3, "label": null, "key": "rotation", "index": 8 }] } }], "name": "ani1", "id": 1, "frameRate": 24, "action": 0 }], "loadList": ["newhand/clip_guang.png", "girl/xiaoshou.png"], "loadList3D": [] };
+            scene.newhand1UI = newhand1UI;
+            REG("ui.scene.newhand1UI", newhand1UI);
             class playerUI extends Laya.View {
                 constructor() { super(); }
                 createChildren() {
@@ -2010,7 +2014,7 @@
         }
         static getHand() {
             if (NewerSession.hand == null) {
-                NewerSession.hand = new ui.scene.newhandUI();
+                NewerSession.hand = new ui.scene.newhand1UI();
             }
             NewerSession.hand.lightClip.play();
             return NewerSession.hand;
@@ -2114,6 +2118,13 @@
             this.mainScene = sprite;
             this.mainScene.height = Laya.stage.height;
             this.mainScene.timeLogo.on(Laya.Event.CLICK, this, this.timeLogoFun);
+            this.mainScene.rankBtn.visible = false;
+            this.mainScene.shareBtn.visible = false;
+            this.mainScene.rightBox.visible = false;
+            this.mainScene.settingBtn.scale(1.5, 1.5);
+            this.mainScene.addChild(this.mainScene.settingBtn);
+            this.mainScene.settingBtn.x = 20;
+            this.mainScene.settingBtn.y = 300;
         }
         timeLogoFun() {
             App.dialog(MyGameInit.TimeGoldDialog);
@@ -4354,13 +4365,8 @@
             }
         }
         loginFun() {
-            if (MyConfig.PLATFORM == DataSession.WX) {
-                Laya.Scene.showLoadingPage();
-                this.loginWXServer();
-            }
-            else {
-                App.getInstance().openScene(MyGameInit.TestScene);
-            }
+            Laya.Scene.showLoadingPage();
+            this.loginWXServer();
         }
         loginWXServer() {
             var obj = {};
@@ -4370,11 +4376,12 @@
             Laya.Browser.window.wx.login(obj);
         }
         loginMyServer(res) {
-            if (res.code) {
+            let j = JSON.stringify(res.data);
+            if (res.token) {
                 var http = new Laya.HttpRequest();
-                let url = MyConfig.IP + "gamex2/login";
-                let httpdata = "scode=" + MyConfig.PLATFORM + "&jscode=" + res.code;
-                http.send(url, httpdata, "post");
+                let url = "https://game.kuwan511.com/gamelogin/login";
+                let httpdata = "scode=" + 3 + "&jscode=" + res.token;
+                http.send(url + "?" + httpdata, null, "GET");
                 http.once(Laya.Event.COMPLETE, this, this.loginMyServerFun, [http]);
                 http.once(Laya.Event.ERROR, this, this.loginErrorFun, [http]);
                 http.once(Laya.Event.PROGRESS, this, this.loginProFun, [http]);
@@ -4390,7 +4397,9 @@
             this.loginLogStatus(http.http.status);
         }
         loginMyServerFun(http, saveKey) {
-            this.saveKey = saveKey;
+            let j = JSON.parse(saveKey);
+            console.log("eeee", j);
+            this.saveKey = j.userInfo.userId;
             this.startHeart();
             this.requestData();
             this.loginLogStatus(http.http.status);
@@ -4399,11 +4408,12 @@
             this.log(LogType.LOGIN_STATUS, value);
         }
         requestData() {
-            App.http(MyConfig.IP + "gamex2/gamedata", "skey=" + this.saveKey, "post", this, this.requestDataFun);
+            App.http("https://game.kuwan511.com/game/get", "skey=" + this.saveKey, "GET", this, this.requestDataFun);
         }
         requestDataFun(str) {
+            console.log("得到数据" + str);
             this.dataIsInit = true;
-            if (str == "0" || str == "") {
+            if (str == "{}" || str == "") {
                 this.log(LogType.NEW_PLAYER, this.saveKey);
                 App.sendEvent(MyEvent.NEWER_INIT);
                 App.getInstance().openScene(MyGameInit.NewerScene);
@@ -4423,11 +4433,12 @@
             }
         }
         requestSaveData(isImportant = false) {
+            let url = "https://game.kuwan511.com/game/save";
             if (isImportant) {
-                App.http(MyConfig.IP + "gamex2/save2", "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=1&num=" + this.jsonObj.stageNum, "post", this, this.requestSaveDataFun);
+                App.http(url, "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=1&num=" + this.jsonObj.stageNum, "post", this, this.requestSaveDataFun);
             }
             else {
-                App.http(MyConfig.IP + "gamex2/save2", "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=0&num=0", "post", this, this.requestSaveDataFun);
+                App.http(url, "skey=" + this.saveKey + "&gamedata=" + JSON.stringify(this.jsonObj) + "&type=0&num=0", "post", this, this.requestSaveDataFun);
             }
         }
         save1() {
@@ -4478,6 +4489,8 @@
             this.battleSession.setNoPlayStage(this.jsonObj.noPlayStage);
             this.sdkSession.shareTime = this.jsonObj.shareTime ? this.jsonObj.shareTime : 0;
             this.sdkSession.shareTimes = this.jsonObj.shareTimes ? this.jsonObj.shareTimes : 0;
+            this.sdkSession.insertTimes = this.jsonObj.insertTimes ? this.jsonObj.insertTimes : 0;
+            this.sdkSession.bannerTimes = this.jsonObj.bannerTimes ? this.jsonObj.bannerTimes : 0;
             this.tianFuSession.setLvString(this.getString(this.jsonObj.talentStr));
             this.tianFuSession.lvTimes = this.getNumber(this.jsonObj.talentLv);
             this.battleSession.setKillBoss(this.jsonObj.killBoss);
@@ -4543,6 +4556,8 @@
             this.jsonObj.noPlayStage = this.battleSession.getNoPlayStage();
             this.jsonObj.shareTime = this.sdkSession.shareTime;
             this.jsonObj.shareTimes = this.sdkSession.shareTimes;
+            this.jsonObj.bannerTimes = this.sdkSession.bannerTimes;
+            this.jsonObj.insertTimes = this.sdkSession.insertTimes;
             this.jsonObj.talentStr = this.tianFuSession.getLvString();
             this.jsonObj.talentLv = this.tianFuSession.lvTimes;
             this.jsonObj.killBoss = this.battleSession.getKillBoss();
@@ -4558,36 +4573,8 @@
         heartFun() {
         }
         log(type, content = "") {
-            console.log("log" + type);
-            var arr = [];
-            arr.push(Laya.Browser.now());
-            arr.push(DataSession.GAME_VER);
-            arr.push(this.saveKey);
-            arr.push(MyConfig.PLATFORM);
-            arr.push(DataSession.ONLY_ID);
-            arr.push(type);
-            arr.push(content);
-            arr.push(this.sdkSession.wxName);
-            let str = arr.join("\t");
-            App.http(MyConfig.IP + "gamex2/gamelog", "log=" + str, "post");
         }
         static staticLog(type, content = "") {
-            if (Laya.Browser.onMiniGame == false) {
-                return;
-            }
-            var arr = [];
-            arr.push(Laya.Browser.now());
-            arr.push(DataSession.GAME_VER);
-            arr.push("have no savekey");
-            arr.push(1);
-            arr.push(DataSession.ONLY_ID);
-            arr.push(type);
-            arr.push(content);
-            var str = "";
-            for (var i = 0; i < arr.length; i++) {
-                str += (arr[i] + "\t");
-            }
-            App.http("https://st.kuwan511.com/gamex2/gamelog", "log=" + str, "post");
         }
         saveRank() {
             if (this.newerSession.isNew) {
@@ -4641,7 +4628,7 @@
     DataSession.WX = 1;
     DataSession.QQ = 2;
     DataSession.DOUYIN = 3;
-    DataSession.GAME_VER = "1.0.0";
+    DataSession.GAME_VER = "5.0.0";
     DataSession.START_TIME = 0;
     DataSession.ONLY_ID = Math.random();
 
@@ -6953,18 +6940,14 @@
             this.errCode = 0;
             this.shareStartTime = 0;
             this.shareTimes = 0;
+            this.insertTimes = 0;
+            this.bannerTimes = 0;
+            this.maxBannerTimes = 5;
+            this.maxInsertTimes = 7;
             this.shareTime = 0;
             this.bannerTime = 0;
             this.banner = null;
-            if (Laya.Browser.onMiniGame == false) {
-                return;
-            }
-            Laya.Browser.window.wx.updateShareMenu({});
-            Laya.Browser.window.wx.showShareMenu({});
-            Laya.Browser.window.wx.onShareAppMessage(() => {
-                return this.getShareObject();
-            });
-            Laya.Browser.window.wx.getSetting({
+            Laya.Browser.window.qg.getSetting({
                 success: res => {
                     if (res.authSetting["scope.userInfo"] == true) {
                         console.log("已经有授权了");
@@ -6976,48 +6959,17 @@
                     }
                 }
             });
-            Laya.Browser.window.wx.setKeepScreenOn({ keepScreenOn: true });
-            Laya.Browser.window.wx.onShow((res) => {
+            Laya.Browser.window.qg.setKeepScreenOn({ keepScreenOn: true });
+            Laya.Browser.window.qg.onShow((res) => {
                 App.sendEvent(MyEvent.WX_ON_SHOW);
             });
-            Laya.Browser.window.wx.onHide((res) => {
+            Laya.Browser.window.qg.onHide((res) => {
                 App.sendEvent(MyEvent.WX_ON_HIDE);
             });
-            const updateManager = Laya.Browser.window.wx.getUpdateManager();
-            updateManager.onCheckForUpdate(function (res) {
-                console.log("版本更新回调:", res.hasUpdate);
-            });
-            updateManager.onUpdateReady(function () {
-                Laya.Browser.window.wx.showModal({
-                    title: '更新提示',
-                    content: '新版本已经准备好，是否重启应用？',
-                    success: function (res) {
-                        if (res.confirm) {
-                            updateManager.applyUpdate();
-                        }
-                    }
-                });
-            });
-            updateManager.onUpdateFailed(function () {
-            });
-            let btn = {};
-            btn.type = "image";
-            let sty = {};
-            sty.left = 0;
-            sty.top = 300;
-            sty.width = 44;
-            sty.height = 44;
-            sty.textAlign = "center";
-            sty.fontSize = 28;
-            sty.lineHeight = 30;
-            btn.style = sty;
-            btn.icon = "green";
-            this.gameClubButton = Laya.Browser.window.wx.createGameClubButton(btn);
-            App.getInstance().eventManager.on(GameEvent.OPEN_SCENE_START, this, this.openScene);
             Laya.timer.callLater(this, this.callLaterFun);
         }
         getUserInfo() {
-            Laya.Browser.window.wx.getUserInfo({
+            Laya.Browser.window.qg.getUserInfo({
                 success: (res) => {
                     var userInfo = res.userInfo;
                     this.wxName = userInfo.nickName;
@@ -7043,72 +6995,69 @@
             }
         }
         initAd() {
-            if (App.isSimulator()) {
-                return;
-            }
-            if (Laya.Browser.onMiniGame) {
-                this.adMap[SdkSession.FLY_BOX] = "adunit-961fd03b6fac0683";
-                this.adMap[SdkSession.GAME_OVER] = "adunit-98b44cb96437ac93";
-                this.adMap[SdkSession.GET_PET] = "adunit-237729103790be65";
-                this.adMap[SdkSession.TIME_GOLD] = "adunit-7b46c29d0d9cf9b3";
-                this.adMap[SdkSession.TREASURE] = "adunit-d4c57c5c9ae67d48";
-                this.adMap[SdkSession.ZHUAN] = "adunit-61819bd988150e65";
-                this.adMap[SdkSession.NEXT_STAGE_CHAPING] = "adunit-8687ae6ea48ab104";
-                this.adMap[SdkSession.AD_DIALOG] = "adunit-ed6eb635c1d6b846";
-                this.adMap[SdkSession.TASK_REWARD] = "adunit-ad8e1d3e0117f62f";
-            }
-            this.ad = Laya.Browser.window.wx.createRewardedVideoAd({ adUnitId: this.adMap[SdkSession.FLY_BOX] });
-            this.ad.onClose((res) => {
-                console.log("广告 观看结果返回");
-                if (res && res.isEnded || res === undefined) {
-                    this.lastAdSucTime = Laya.Browser.now();
-                    this.exeHandler();
-                    App.sendEvent(MyEvent.PLAY_AD);
-                    App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.VEDIO_SUC, this.currentAdType]);
-                    App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.REWARD, this.currentAdType]);
-                    this.dataSession.log(LogType.AD_SUC_OVER);
+            this.adMap[SdkSession.FLY_BOX] = "146717";
+            this.adMap[SdkSession.GAME_OVER] = "146721";
+            this.adMap[SdkSession.GET_PET] = "146713";
+            this.adMap[SdkSession.TIME_GOLD] = "146710";
+            this.adMap[SdkSession.TREASURE] = "146715";
+            this.adMap[SdkSession.ZHUAN] = "146718";
+            this.adMap[SdkSession.NEXT_STAGE_CHAPING] = "146722";
+            this.adMap[SdkSession.AD_DIALOG] = "146714";
+            this.adMap[SdkSession.TASK_REWARD] = "146712";
+            Laya.Browser.window.qg.initAdService({
+                appId: "30229896",
+                success: function (res) {
+                },
+                fail: function (res) {
+                },
+                complete: function (res) {
                 }
-                else {
-                    App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.VEDIO_FAIL, this.currentAdType]);
-                }
-                App.sendEvent(MyEvent.AD_OVER);
-            });
-            this.ad.onError(err => {
-                this.adStat = 2;
-                this.errCode = err.errCode;
-                App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.NO_HAVE, this.currentAdType]);
-                console.log("广告 加载错误:", err);
-                if (this.errCode == 1004) {
-                    console.log("加载视频失败,30秒后重试");
-                    Laya.timer.once(30 * 1000, this, this.retryAdFun);
-                }
-                this.dataSession.log(LogType.AD_FAIL, this.errCode + "");
-            });
-            this.ad.onLoad(() => {
-                this.adStat = 1;
-                console.log("广告 加载成功");
             });
         }
         retryAdFun() {
-            this.ad.load();
         }
         playAdVideo(code, h) {
             this.currentAdType = code;
             console.log("广告 开始播放");
             App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.VEDIO_CLICK, code]);
-            if (Laya.Browser.onMiniGame == false) {
-                h.runWith(1);
-                App.sendEvent(MyEvent.PLAY_AD);
-                return;
-            }
-            if (this.adStat == 2) {
-                this.share2(h);
-                return;
-            }
             this.adHandler = h;
             let adid = this.adMap[code];
-            Laya.Browser.window.wx.createRewardedVideoAd({ adUnitId: adid });
-            this.tryShowAD();
+            this.playVideo(adid);
+        }
+        playVideo(codeId) {
+            if (this.videoAd) {
+                this.videoAd.destroy();
+                this.videoAd = null;
+            }
+            this.videoAd = Laya.Browser.window.qg.createRewardedVideoAd({ adUnitId: codeId });
+            this.videoAd.offError(function (res) { });
+            this.videoAd.offLoad(function (res) { });
+            this.videoAd.offClose(function (res) { });
+            this.videoAd.onError(function (res) {
+                console.log('videoAd onError====' + res.errMsg);
+            });
+            this.videoAd.onVideoStart(function () {
+                console.log('激励视频 开始播放');
+            });
+            this.videoAd.onClose((res) => {
+                if (res.isEnded) {
+                    console.log("关闭广告");
+                    this.exeHandler();
+                    App.sendEvent(MyEvent.PLAY_AD);
+                    App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.VEDIO_SUC, this.currentAdType]);
+                    App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.REWARD, this.currentAdType]);
+                }
+            });
+            this.videoAd.onLoad((res) => {
+                if (res.msg == "ok") {
+                    console.log('激励视频加载成功' + this.videoAd);
+                    this.videoAd.show();
+                }
+                else {
+                    console.log('激励视频加载失败');
+                }
+            });
+            this.videoAd.load();
         }
         initAdBtn(sp, type) {
             sp.gray = (this.adStat == 2);
@@ -7119,41 +7068,26 @@
             App.sendEvent(MyEvent.AD_EVENT, [AD_STAT.DIALOG_CLOSE, type]);
         }
         tryShowAD() {
-            this.dataSession.log(LogType.AD_SUC);
-            this.ad.show().catch(() => {
-                this.ad.load().then(() => this.ad.show()).catch(err => {
-                    console.log('广告再加载失败');
-                    console.log(err);
-                    this.adStat = 2;
-                    this.dataSession.log(LogType.AD_FAIL_2);
-                });
-            });
         }
         exeHandler() {
             this.adHandler.runWith(1);
         }
         exeHandler2() {
-            this.share(this.adHandler);
         }
         share2(h) {
             var obj = this.getShareObject();
             obj.query = "";
             obj.imageUrlId = "";
-            Laya.Browser.window.wx.shareAppMessage(obj);
+            Laya.Browser.window.qg.shareAppMessage(obj);
             this.shareStartTime = Laya.Browser.now();
             App.getInstance().eventManager.once(MyEvent.WX_ON_SHOW, this, this.showFun, [h]);
         }
         share(h, type = 0) {
             this.checkShare();
-            if (Laya.Browser.onMiniGame == false) {
-                this.shareTimes++;
-                h.runWith(1);
-                return;
-            }
             var obj = this.getShareObject();
             obj.query = "";
             obj.imageUrlId = "";
-            Laya.Browser.window.wx.shareAppMessage(obj);
+            Laya.Browser.window.qg.shareAppMessage(obj);
             App.sendEvent(MyEvent.SHARE_START, type);
             this.shareStartTime = Laya.Browser.now();
             let chao = this.shareTimes >= SdkSession.SHARE_MAX_TIMES;
@@ -7202,30 +7136,48 @@
             obj.fail = (res) => {
                 console.log("失败", res);
             };
-            Laya.Browser.window.wx.setUserCloudStorage(obj);
+            Laya.Browser.window.qg.setUserCloudStorage(obj);
         }
         showBanner(code) {
+            this.showBanner2();
+        }
+        showBanner2() {
+            let sysInfo = Laya.Browser.window.qg.getSystemInfoSync();
             let obj = {};
-            obj.adUnitId = code;
-            let l = (Laya.Browser.clientWidth - 300) / 2;
-            obj.style = { left: l, top: 0, width: 300, height: 125 };
-            obj.adIntervals = 30;
-            if (this.banner == null || (Laya.Browser.now() - this.bannerTime) > 30 * 1000) {
-                if (this.banner) {
-                    this.banner.hide();
-                    this.banner.destroy();
-                }
-                this.banner = Laya.Browser.window.wx.createBannerAd(obj);
-                this.bannerTime = Laya.Browser.now();
+            obj.adUnitId = "146706";
+            obj.style = { left: 0, top: sysInfo.windowHeight - 100, width: sysInfo.windowWidth, height: 100 };
+            console.log("显示banner", this.bannerTimes);
+            if (!this.banner) {
+                this.banner = Laya.Browser.window.qg.createBannerAd(obj);
+                this.banner.onError((res) => {
+                    console.log("banner error====" + res.errMsg);
+                });
+                this.banner.onResize((res) => {
+                    this.banner.style.top = sysInfo.windowHeight - res.height;
+                    console.log("banner top=========" + this.banner.style.top + "," + res.height);
+                });
+                this.banner.onHide((res) => {
+                    console.log("调用banner的hide", this.isBool);
+                    if (!this.isBool) {
+                        if (this.bannerTimes < this.maxBannerTimes) {
+                            this.bannerTimes++;
+                            this.dataSession.saveData();
+                            console.log("刷新banner的次数");
+                        }
+                    }
+                });
             }
-            this.banner.onResize(res => {
-                this.banner.style.top = Laya.Browser.clientHeight - res.height - 20;
-            });
-            this.banner.show();
+            if (this.bannerTimes < this.maxBannerTimes) {
+                this.isBool = false;
+                this.banner.show();
+                console.log("显示banner");
+            }
         }
         hideBanner() {
             if (this.banner) {
                 this.banner.hide();
+                console.log("自动隐藏banner");
+                this.isBool = true;
             }
         }
         addUserInfoBtn(sp, h) {
@@ -7235,7 +7187,7 @@
             var btnY = p.y * s;
             var btnwid = sp.width * s;
             var btnhei = sp.height * s;
-            this.userInfoButton = Laya.Browser.window.wx.createUserInfoButton({
+            this.userInfoButton = Laya.Browser.window.qg.createUserInfoButton({
                 type: 'text',
                 text: '',
                 style: {
@@ -7270,58 +7222,38 @@
             }
         }
         chaPingAd(type, handler) {
-            if (Laya.Browser.window.wx.createInterstitialAd == null) {
-                handler.run();
-                return;
-            }
-            if ((Laya.Browser.now() - this.lastAdSucTime) < 3 * 60 * 1000) {
-                handler.run();
-                return;
-            }
-            if (this.canUse("2.6.0") == false) {
-                handler.run();
-                return;
-            }
             let code = this.adMap[type];
             if (code == null) {
                 handler.run();
                 return;
             }
-            let obj = {};
-            obj.adUnitId = code;
-            let ad = Laya.Browser.window.wx.createInterstitialAd(obj);
-            ad.show().catch((err) => {
-                console.error("插屏广告:", err);
+            this.InsertAd(code, handler);
+        }
+        InsertAd(codeId, handler) {
+            this.hideBanner();
+            console.log("插屏的次数", this.insertTimes);
+            if (this.insertAds) {
+                this.insertAds.destroy();
+            }
+            this.insertAds = Laya.Browser.window.qg.createInsertAd({
+                adUnitId: codeId
             });
-            ad.onClose(() => {
+            this.insertAds.onError((res) => {
+                console.log("insertAD error====" + res.errMsg);
+            });
+            this.insertAds.onClose(() => {
                 handler.run();
+                if (this.insertTimes < this.maxInsertTimes) {
+                    this.insertTimes++;
+                    this.dataSession.saveData();
+                }
             });
-        }
-        canUse(str) {
-            return this.compareVersion(str) >= 0;
-        }
-        compareVersion(v) {
-            let now = Laya.Browser.window.wx.getSystemInfoSync().SDKVersion;
-            let v1 = v.split('.');
-            let v2 = now.split('.');
-            const len = Math.max(v1.length, v2.length);
-            while (v1.length < len) {
-                v1.push('0');
-            }
-            while (v2.length < len) {
-                v2.push('0');
-            }
-            for (let i = 0; i < len; i++) {
-                const num1 = parseInt(v1[i]);
-                const num2 = parseInt(v2[i]);
-                if (num1 > num2) {
-                    return 1;
+            this.insertAds.load();
+            this.insertAds.onLoad((res) => {
+                if (this.insertTimes < this.maxInsertTimes) {
+                    this.insertAds.show();
                 }
-                else if (num1 < num2) {
-                    return -1;
-                }
-            }
-            return 0;
+            });
         }
     }
     SdkSession.FLY_BOX = 0;
@@ -7567,8 +7499,7 @@
             App.getInstance().eventManager.once(MyEvent.GET_GOLD_CLOSE, this, this.next);
         }
         next() {
-            let id = this.battleSession.sys.nextId;
-            this.nextHandlerFun();
+            this.sdkSession.chaPingAd(SdkSession.NEXT_STAGE_CHAPING, new Laya.Handler(this, this.nextHandlerFun));
         }
         nextHandlerFun() {
             Laya.MouseManager.enabled = true;
@@ -9256,1437 +9187,19 @@
         }
     }
 
-    class YouziMoreGame extends ui.youzi.Youzi_MoreGameUI {
-        constructor() {
-            super();
-            this.hotlistDatas = [];
-            this.mainItemExposure = {};
-            this.mainItemExposureCount = 0;
-            this.fisrtShow = false;
-            this.isCreate = false;
-            this.centerX = 0;
-            this.centerY = 0;
-            this.visible = false;
-            this.MoreGameUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.MoreGameUI.pos(x, y);
-        }
-        onEnable() {
-            var isMoreGameOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isMoreGameOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        showMoreGameUI() {
-            if (this.isCreate && !this.visible) {
-                this.visible = true;
-                this.moreGameList.mouseThrough = false;
-                this.MoreGameUI.scale(1, 1);
-                this.MoreGameUI.visible = true;
-                if (window['onOpenCenter']) {
-                    window['onOpenCenter']();
-                }
-                if (!this.fisrtShow) {
-                    this.fisrtShow = true;
-                    this.checkExposure();
-                }
-            }
-        }
-        onBtnCloseClicked() {
-            this.visible = false;
-            this.moreGameList.mouseThrough = true;
-            this.MoreGameUI.scale(0, 0);
-            this.MoreGameUI.visible = false;
-            if (window['onCloseCenter']) {
-                window['onCloseCenter']();
-            }
-        }
-        initShow() {
-            this.moreGameCloseBtn.on(Laya.Event.CLICK, this, this.onBtnCloseClicked);
-            if (Laya.Browser.window.YouziDataManager.hotListDatas.length > 0) {
-                this.hotlistDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-                this.moreGameList.renderHandler = new Laya.Handler(this, this.updataMainUiItem);
-                var arr = [];
-                for (var i = 0; i < this.hotlistDatas.length; i++) {
-                    var pRecord = this.hotlistDatas[i];
-                    arr.push({ infoData: pRecord, namelab: pRecord.title });
-                }
-                this.moreGameList.mouseHandler = new Laya.Handler(this, this.moreGameListMouseEvent);
-                this.moreGameList.dataSource = arr;
-                this.isCreate = true;
-            }
-        }
-        updataMainUiItem(cell, index) {
-            var icon = cell.getChildByName('icon');
-            icon.loadImage(this.hotlistDatas[index].iconImg);
-            if (this.MoreGameUI.visible && !this.mainItemExposure[this.hotlistDatas[index].appid]) {
-                this.mainItemExposureCount++;
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotlistDatas[index], 5);
-                this.mainItemExposure[this.hotlistDatas[index].appid] = 1;
-            }
-        }
-        moreGameListMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotlistDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-                var curTime = Laya.Browser.window.YouziDataManager.YouziDateFtt("yyyyMMdd", new Date());
-                localStorage.setItem(tmpData.appid, curTime);
-            }
-            else if (e.type == 'mouseover') ;
-        }
-        checkExposure() {
-            if (this.MoreGameUI.visible) {
-                for (var i = 0; i < this.moreGameList.cells.length; i++) {
-                    var tepItem = this.moreGameList.getCell(i);
-                    if (tepItem && this.moreGameList.getItem(i)) {
-                        var infoData = this.moreGameList.getItem(i).infoData;
-                        if (tepItem.y >= 10 && tepItem.y <= 768 && !this.mainItemExposure[this.moreGameList.getItem(i).infoData.appid]) {
-                            this.mainItemExposureCount++;
-                            this.mainItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 5);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziMoreGameH extends ui.youzi.Youzi_MoreGameHUI {
-        constructor() {
-            super();
-            this.hotlistDatas = [];
-            this.mainItemExposure = {};
-            this.mainItemExposureCount = 0;
-            this.fisrtShow = false;
-            this.isCreate = false;
-            if (Laya.stage.width / Laya.stage.height >= 1.9) {
-                this.MoreGameUI.scale(0.9, 0.9);
-                var scaleW = this.MoreGameUI.width * 0.9;
-                var scaleH = this.MoreGameUI.height * 0.9;
-                this.MoreGameUI.pos(Laya.stage.width / 2 - scaleW / 2, Laya.stage.height / 2 - scaleH / 2);
-            }
-            else {
-                this.centerX = 0;
-                this.centerY = 0;
-            }
-            this.visible = false;
-            this.MoreGameUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.MoreGameUI.pos(x, y);
-        }
-        onEnable() {
-            var isMoreGameOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isMoreGameOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        showMoreGameUI() {
-            if (this.isCreate && !this.visible) {
-                this.visible = true;
-                this.moreGameList.mouseThrough = false;
-                this.MoreGameUI.visible = true;
-                if (window['onOpenCenter']) {
-                    window['onOpenCenter']();
-                }
-                if (!this.fisrtShow) {
-                    this.fisrtShow = true;
-                    this.checkExposure();
-                }
-            }
-        }
-        onBtnCloseClicked() {
-            this.visible = false;
-            this.moreGameList.mouseThrough = true;
-            this.MoreGameUI.visible = false;
-            if (window['onCloseCenter']) {
-                window['onCloseCenter']();
-            }
-        }
-        initShow() {
-            this.moreGameList.scrollBar.hide = true;
-            this.moreGameCloseBtn.on(Laya.Event.CLICK, this, this.onBtnCloseClicked);
-            if (Laya.Browser.window.YouziDataManager.hotListDatas.length > 0) {
-                this.hotlistDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-                this.moreGameList.renderHandler = new Laya.Handler(this, this.updataMainUiItem);
-                var arr = [];
-                for (var i = 0; i < this.hotlistDatas.length; i++) {
-                    var pRecord = this.hotlistDatas[i];
-                    arr.push({ infoData: pRecord, namelab: pRecord.title });
-                }
-                this.moreGameList.mouseHandler = new Laya.Handler(this, this.moreGameListMouseEvent);
-                this.moreGameList.dataSource = arr;
-                this.isCreate = true;
-            }
-        }
-        updataMainUiItem(cell, index) {
-            var icon = cell.getChildByName('icon');
-            icon.loadImage(this.hotlistDatas[index].iconImg);
-            if (this.MoreGameUI.visible && !this.mainItemExposure[this.hotlistDatas[index].appid]) {
-                this.mainItemExposureCount++;
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotlistDatas[index], 5);
-                this.mainItemExposure[this.hotlistDatas[index].appid] = 1;
-            }
-        }
-        moreGameListMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotlistDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-                var curTime = Laya.Browser.window.YouziDataManager.YouziDateFtt("yyyyMMdd", new Date());
-                localStorage.setItem(tmpData.appid, curTime);
-            }
-            else if (e.type == 'mouseover') ;
-        }
-        checkExposure() {
-            if (this.MoreGameUI.visible) {
-                for (var i = 0; i < this.moreGameList.cells.length; i++) {
-                    var tepItem = this.moreGameList.getCell(i);
-                    if (tepItem && this.moreGameList.getItem(i)) {
-                        var infoData = this.moreGameList.getItem(i).infoData;
-                        console.log(tepItem.y);
-                        if (tepItem.y >= 10 && tepItem.y <= 768 && !this.mainItemExposure[this.moreGameList.getItem(i).infoData.appid]) {
-                            this.mainItemExposureCount++;
-                            this.mainItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 5);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziSlideWindow extends ui.youzi.Youzi_SlideWindowUI {
-        constructor(leftOrRight) {
-            super();
-            this.hotlistDatas = [];
-            this.slideItemExposure = {};
-            this.slideItemExposureCount = 0;
-            this.showFirst = false;
-            this.isLeft = false;
-            this.ttt = 400;
-            this.isLeft = leftOrRight;
-            this.centerY = 0;
-            this.visible = false;
-            this.SlideWindowUI.visible = false;
-            if (!leftOrRight) {
-                this.right = -this.width;
-                this.slideBg.scaleX = -1;
-                this.slideBg.pos(this.slideBg.width, this.slideBg.y);
-                this.slideList.pos(2 * this.slideList.x, this.slideList.y);
-            }
-            else {
-                this.left = -this.width;
-            }
-        }
-        setYouziPosition(y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.SlideWindowUI.pos(this.SlideWindowUI.x, y);
-        }
-        onEnable() {
-            var isSlideDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isSlideDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        showSlideWindow() {
-            if (!this.SlideWindowUI.visible) {
-                this.visible = true;
-                this.SlideWindowUI.visible = true;
-                var self = this;
-                this.slideWindowActionShow(function () {
-                    if (!self.showFirst) {
-                        self.showFirst = true;
-                        self.checkExposure();
-                    }
-                });
-            }
-        }
-        slideWindowActionShow(actionFinishCall) {
-            if (!this.isLeft) {
-                Laya.Tween.to(this, {
-                    right: 0
-                }, this.ttt, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-            else {
-                Laya.Tween.to(this, {
-                    left: 0
-                }, this.ttt, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-        }
-        closeSlideWindow() {
-            var self = this;
-            this.slideWindowActionClose(function () {
-                self.visible = false;
-                self.SlideWindowUI.visible = false;
-                self.btnSLideClose.visible = true;
-            });
-            self.btnSLideClose.visible = false;
-        }
-        slideWindowActionClose(actionFinishCall) {
-            if (!this.isLeft) {
-                Laya.Tween.to(this, {
-                    right: -this.width
-                }, this.ttt, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-            else {
-                Laya.Tween.to(this, {
-                    left: -this.width
-                }, this.ttt, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-        }
-        initShow() {
-            this.hotlistDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-            this.slideList.scrollBar.hide = true;
-            this.slideList.renderHandler = new Laya.Handler(this, this.updataSlideListItem);
-            var arr = [];
-            for (var i = 0; i < this.hotlistDatas.length; i++) {
-                var pRecord = this.hotlistDatas[i];
-                arr.push({ infoData: pRecord, namelab: pRecord.title });
-            }
-            this.btnSLideClose.on(Laya.Event.CLICK, this, this.closeSlideWindow);
-            this.slideList.mouseHandler = new Laya.Handler(this, this.onslideListItemMouseEvent);
-            this.slideList.dataSource = arr;
-        }
-        updataSlideListItem(cell, index) {
-            var icon = cell.getChildByName('icon');
-            icon.loadImage(this.hotlistDatas[index].iconImg);
-            if (this.SlideWindowUI.visible && !this.slideItemExposure[this.hotlistDatas[index].appid]) {
-                this.slideItemExposureCount++;
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotlistDatas[index], 2);
-                this.slideItemExposure[this.hotlistDatas[index].appid] = 1;
-            }
-        }
-        onslideListItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotlistDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-                if (tmpData.hotred == 1) {
-                    var tmpSlideHit = this.slideList.getCell(index).getChildByName('icon').getChildByName('markImg');
-                    tmpSlideHit.visible = false;
-                }
-            }
-            else if (e.type == 'mouseover') ;
-        }
-        checkExposure() {
-            if (this.SlideWindowUI.visible) {
-                if (this.slideItemExposureCount >= this.hotlistDatas.length)
-                    return;
-                for (var i = 0; i < this.slideList.cells.length; i++) {
-                    var tepItem = this.slideList.getCell(i);
-                    if (tepItem && this.slideList.getItem(i)) {
-                        var infoData = this.slideList.getItem(i).infoData;
-                        if (tepItem.y >= 10 && tepItem.y <= 720 && !this.slideItemExposure[infoData.appid]) {
-                            this.slideItemExposureCount++;
-                            this.slideItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 2);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziSlideWindowH extends ui.youzi.Youzi_SlideWindowHUI {
-        constructor(leftOrRight) {
-            super();
-            this.hotlistDatas = [];
-            this.slideItemExposure = {};
-            this.slideItemExposureCount = 0;
-            this.showFirst = false;
-            this.isFullDevice = false;
-            this.acitonPianYi = 0;
-            this.isLeft = false;
-            this.isLeft = leftOrRight;
-            if (Laya.stage.width / Laya.stage.height >= 1.9) {
-                this.isFullDevice = true;
-                this.acitonPianYi = 20;
-                this.scale(0.9, 0.9);
-                var scaleH = this.height * 0.9;
-                this.pos(this.x, Laya.stage.height / 2 - scaleH / 2);
-            }
-            else {
-                this.centerY = 0;
-            }
-            this.visible = false;
-            this.SlideWindowUI.visible = false;
-            if (!leftOrRight) {
-                this.right = -this.width;
-                this.slideBg.scaleX = -1;
-                this.slideBg.pos(this.slideBg.width, this.slideBg.y);
-                this.slideList.pos(this.slideList.x, this.slideList.y);
-            }
-            else {
-                this.left = -this.width;
-            }
-        }
-        setYouziPosition(y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.pos(this.x, y);
-        }
-        onEnable() {
-            var isSlideDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isSlideDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        showSlideWindow() {
-            if (!this.SlideWindowUI.visible) {
-                this.visible = true;
-                this.SlideWindowUI.visible = true;
-                var self = this;
-                this.slideWindowActionShow(function () {
-                    if (!self.showFirst) {
-                        self.showFirst = true;
-                        self.checkExposure();
-                    }
-                });
-            }
-        }
-        slideWindowActionShow(actionFinishCall) {
-            var self = this;
-            if (!this.isLeft) {
-                Laya.Tween.to(this, {
-                    right: self.acitonPianYi
-                }, 1200, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-            else {
-                Laya.Tween.to(this, {
-                    left: self.acitonPianYi
-                }, 1200, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-        }
-        closeSlideWindow() {
-            var self = this;
-            this.slideWindowActionClose(function () {
-                self.visible = false;
-                self.SlideWindowUI.visible = false;
-                self.btnSLideClose.visible = true;
-            });
-            self.btnSLideClose.visible = false;
-        }
-        slideWindowActionClose(actionFinishCall) {
-            if (!this.isLeft) {
-                Laya.Tween.to(this, {
-                    right: -this.width
-                }, 1200, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-            else {
-                Laya.Tween.to(this, {
-                    left: -this.width
-                }, 1200, Laya.Ease.quadInOut, Laya.Handler.create(this, actionFinishCall));
-            }
-        }
-        initShow() {
-            this.hotlistDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-            this.slideList.scrollBar.hide = true;
-            this.slideList.renderHandler = new Laya.Handler(this, this.updataSlideListItem);
-            var arr = [];
-            for (var i = 0; i < this.hotlistDatas.length; i++) {
-                var pRecord = this.hotlistDatas[i];
-                arr.push({ infoData: pRecord, namelab: pRecord.title });
-            }
-            this.btnSLideClose.on(Laya.Event.CLICK, this, this.closeSlideWindow);
-            this.slideList.mouseHandler = new Laya.Handler(this, this.onslideListItemMouseEvent);
-            this.slideList.dataSource = arr;
-        }
-        updataSlideListItem(cell, index) {
-            var icon = cell.getChildByName('icon');
-            icon.loadImage(this.hotlistDatas[index].iconImg);
-            if (this.SlideWindowUI.visible && !this.slideItemExposure[this.hotlistDatas[index].appid]) {
-                this.slideItemExposureCount++;
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotlistDatas[index], 2);
-                this.slideItemExposure[this.hotlistDatas[index].appid] = 1;
-            }
-        }
-        onslideListItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotlistDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-                if (tmpData.hotred == 1) {
-                    var tmpSlideHit = this.slideList.getCell(index).getChildByName('icon').getChildByName('markImg');
-                    tmpSlideHit.visible = false;
-                }
-            }
-            else if (e.type == 'mouseover') ;
-        }
-        checkExposure() {
-            if (this.SlideWindowUI.visible) {
-                if (this.slideItemExposureCount >= this.hotlistDatas.length)
-                    return;
-                for (var i = 0; i < this.slideList.cells.length; i++) {
-                    var tepItem = this.slideList.getCell(i);
-                    if (tepItem && this.slideList.getItem(i)) {
-                        var infoData = this.slideList.getItem(i).infoData;
-                        if (tepItem.y >= 10 && tepItem.y <= 720 && !this.slideItemExposure[infoData.appid]) {
-                            this.slideItemExposureCount++;
-                            this.slideItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 2);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziBottomBanner extends ui.youzi.Youzi_BottomBannerUI {
-        constructor() {
-            super();
-            this.hotListDatas = [];
-            this.gameBannerDatas = [];
-            this.bannerBottomItemExposure = {};
-            this.bannerSwithCount = 0;
-            this.pos(Laya.stage.width / 2 - this.BannerBottomUI.width / 2, Laya.stage.height - this.BannerBottomUI.height);
-            this.visible = false;
-            this.BannerBottomUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.pos(x, y);
-        }
-        onEnable() {
-            var isBottomDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isBottomDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.hotListDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-            if (this.hotListDatas.length <= 0) {
-                return;
-            }
-            this.gameBannerDatas = Laya.Browser.window.YouziDataManager.gameBannerDatas;
-            this.visible = true;
-            if (Laya.Browser.window.YouziDataManager.currentBannerType == Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_JUZHEN ||
-                Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_SWITH == Laya.Browser.window.YouziDataManager.currentBannerType) {
-                this.BannerBottomUI.visible = true;
-                this.gameBannerList.scaleY = 0;
-                this.loadBottomList();
-                if (Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_SWITH == Laya.Browser.window.YouziDataManager.currentBannerType) {
-                    Laya.Browser.window.YouziDataManager.createWXBanner();
-                }
-            }
-            else if (Laya.Browser.window.YouziDataManager.currentBannerType == Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_GAME) {
-                this.BannerBottomUI.visible = true;
-                this.bannerBottomBg.visible = false;
-                this.bottomList.scaleY = 0;
-                this.loadGameBannerList();
-            }
-            else if (Laya.Browser.window.YouziDataManager.currentBannerType == Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_WX) {
-                Laya.Browser.window.YouziDataManager.showWXBanner(true);
-            }
-        }
-        loadBottomList() {
-            this.bottomList.repeatX = this.hotListDatas.length;
-            this.bottomList.scrollBar.hide = true;
-            var arr = [];
-            for (var i = 0; i < this.hotListDatas.length; i++) {
-                var pRecord = this.hotListDatas[i];
-                arr.push({ infoData: pRecord, namelab: pRecord.title });
-            }
-            this.bottomList.mouseHandler = new Laya.Handler(this, this.onBannerItemMouseEvent);
-            this.bottomList.dataSource = arr;
-            for (var j = 0; j < this.hotListDatas.length; j++) {
-                var icon = this.bottomList.getCell(j).getChildByName('icon');
-                icon.loadImage(this.hotListDatas[j].iconImg);
-                if (j < 6) {
-                    Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotListDatas[j], 3);
-                    this.bannerBottomItemExposure[this.hotListDatas[j].appid] = 1;
-                }
-            }
-            Laya.timer.frameLoop(2, this, this.bannerSwitchUpdate);
-            this.bottomlistAutoScroll();
-        }
-        onBannerItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotListDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-                var curTime = Laya.Browser.window.YouziDataManager.YouziDateFtt("yyyyMMdd", new Date());
-                localStorage.setItem(tmpData.appid, curTime);
-            }
-            else if (e.type == 'mouseover') {
-                this.checkExposure();
-            }
-        }
-        bannerSwitchUpdate() {
-            if (Laya.Browser.window.YouziDataManager.BANNERTYPE.BANNER_SWITH != Laya.Browser.window.YouziDataManager.currentBannerType) {
-                return;
-            }
-            this.bannerSwithCount += 2;
-            if (!Laya.Browser.window.YouziDataManager.isWxBannerErr &&
-                Laya.Browser.window.YouziDataManager.bannerAutoChangeInterval != 0) {
-                if (this.bannerSwithCount % (Laya.Browser.window.YouziDataManager.bannerAutoChangeInterval * 60) == 0) {
-                    if (this.bannerSwithCount % (Laya.Browser.window.YouziDataManager.bannerAutoChangeInterval * 120) == 0) {
-                        Laya.Browser.window.YouziDataManager.hideWXBanner();
-                        this.BannerBottomUI.visible = true;
-                    }
-                    else {
-                        this.BannerBottomUI.visible = false;
-                        if (this.bannerSwithCount % (Laya.Browser.window.YouziDataManager.bannerWXRefreshInterval * 60) == 0) {
-                            Laya.Browser.window.YouziDataManager.showWXBanner(true);
-                        }
-                        else {
-                            Laya.Browser.window.YouziDataManager.showWXBanner(false);
-                        }
-                    }
-                }
-            }
-        }
-        bottomlistAutoScroll() {
-            if (this.hotListDatas.length <= 5) {
-                return;
-            }
-            var self = this;
-            var endIndex = self.hotListDatas.length - 5;
-            var dur = endIndex * 5000;
-            if (self.bottomList.startIndex <= endIndex - 1) {
-                this.bottomList.tweenTo(endIndex, dur, new Laya.Handler(this, this.bottomlistAutoScroll));
-            }
-            else {
-                this.bottomList.tweenTo(0, dur, new Laya.Handler(this, this.bottomlistAutoScroll));
-            }
-        }
-        checkExposure() {
-            if (this.BannerBottomUI.visible) {
-                for (var i = 0; i < this.bottomList.length; i++) {
-                    var temItem = this.bottomList.getItem(i);
-                    if (temItem && this.bottomList.getItem(i)) {
-                        var infoData = this.bottomList.getItem(i).infoData;
-                        if (temItem.x < 640 && !this.bannerBottomItemExposure[infoData.appid]) {
-                            this.bannerBottomItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 3);
-                        }
-                    }
-                }
-            }
-        }
-        loadGameBannerList() {
-            var self = this;
-            self.gameBannerList.repeatX = this.gameBannerDatas.length;
-            this.gameBannerList.scrollBar.hide = true;
-            var arr = [];
-            for (var i = 0; i < self.gameBannerDatas.length; i++) {
-                var pRecord = this.gameBannerDatas[i];
-                arr.push({ infoData: pRecord });
-            }
-            self.gameBannerList.selectEnable = true;
-            self.gameBannerList.mouseHandler = new Laya.Handler(this, this.ongameBannerItemMouseEvent);
-            self.gameBannerList.dataSource = arr;
-            for (var j = 0; j < self.gameBannerDatas.length; j++) {
-                var icon = this.gameBannerList.getCell(j).getChildByName('icon');
-                icon.loadImage(this.gameBannerDatas[j].bannerImg);
-            }
-            Laya.timer.frameLoop(400, this, this.updateGameBanner);
-        }
-        updateGameBanner(e) {
-            if (this.hotListDatas.length < 1) {
-                return;
-            }
-            var startIdx = this.gameBannerList.startIndex + 1;
-            this.gameBannerList.scrollTo(startIdx >= this.hotListDatas.length ? 0 : startIdx);
-        }
-        ongameBannerItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的gamebannerlist索引：" + index);
-                var tmpData = this.gameBannerDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 5;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-            }
-            else if (e.type == 'mouseover') ;
-        }
-    }
-
-    class YouziGuessLike extends ui.youzi.Youzi_GuessLikeUI {
-        constructor() {
-            super();
-            this.hotListDatas = [];
-            this.guessAnyItemExposure = {};
-            this.firstShow = false;
-            this.visible = false;
-            this.guessUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.pos(x, y);
-        }
-        onEnable() {
-            var guessLikeDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (guessLikeDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.hotListDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-            if (this.hotListDatas.length <= 0) {
-                return;
-            }
-            this.guesslist.scrollBar.hide = true;
-            this.guesslist.repeatX = this.hotListDatas.length;
-            var arr = [];
-            for (var i = 0; i < this.hotListDatas.length; i++) {
-                var pRecord = this.hotListDatas[i];
-                arr.push({ infoData: pRecord });
-            }
-            this.guesslist.mouseHandler = new Laya.Handler(this, this.onGuessLikeItemMouseEvent);
-            this.guesslist.dataSource = arr;
-            for (var j = 0; j < this.hotListDatas.length; j++) {
-                var icon = this.guesslist.getCell(j).getChildByName('icon');
-                icon.loadImage(this.hotListDatas[j].iconImg);
-                if (j < 4) {
-                    Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotListDatas[j], 4);
-                    this.guessAnyItemExposure[this.hotListDatas[j].appid] = 1;
-                }
-            }
-            this.visible = true;
-            this.guessUI.visible = true;
-            this.guessAnylistAutoScroll();
-        }
-        guessAnylistAutoScroll() {
-            if (!this.guessUI.visible)
-                return;
-            if (this.hotListDatas.length <= 4) {
-                return;
-            }
-            var self = this;
-            var endIndex = self.hotListDatas.length - 4;
-            var dur = endIndex * 5000;
-            if (self.guesslist.startIndex < endIndex - 1) {
-                this.guesslist.tweenTo(endIndex, dur, new Laya.Handler(this, this.guessAnylistAutoScroll));
-            }
-            else {
-                this.guesslist.tweenTo(0, dur, new Laya.Handler(this, this.guessAnylistAutoScroll));
-            }
-        }
-        onGuessLikeItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotListDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-            }
-            else if (e.type == 'mouseover') {
-                this.checkExposure();
-            }
-        }
-        checkExposure() {
-            if (this.guessUI.visible) {
-                for (var i = 0; i < this.guesslist.length; i++) {
-                    var temItem = this.guesslist.getItem(i);
-                    if (temItem && this.guesslist.getItem(i)) {
-                        var infoData = this.guesslist.getItem(i).infoData;
-                        if (temItem.x < 464 && !this.guessAnyItemExposure[infoData.appid]) {
-                            this.guessAnyItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 4);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziGuessLikeH extends ui.youzi.Youzi_GuessLikeHUI {
-        constructor() {
-            super();
-            this.hotlistDatas = [];
-            this.guessAnyItemExposure = {};
-            this.firstShow = false;
-            this.visible = false;
-            this.guessUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.pos(x, y);
-        }
-        onEnable() {
-            var guessLikeDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (guessLikeDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.hotlistDatas = Laya.Browser.window.YouziDataManager.hotListDatas;
-            this.guesslist.scrollBar.hide = true;
-            this.guesslist.repeatY = this.hotlistDatas.length;
-            var arr = [];
-            for (var i = 0; i < this.hotlistDatas.length; i++) {
-                var pRecord = this.hotlistDatas[i];
-                arr.push({ infoData: pRecord });
-            }
-            this.guesslist.mouseHandler = new Laya.Handler(this, this.onGuessLikeItemMouseEvent);
-            this.guesslist.dataSource = arr;
-            for (var j = 0; j < this.hotlistDatas.length; j++) {
-                var icon = this.guesslist.getCell(j).getChildByName('icon');
-                icon.loadImage(this.hotlistDatas[j].iconImg);
-                if (j < 4) {
-                    Laya.Browser.window.YouziDataManager.sendExposureLog(this.hotlistDatas[j], 4);
-                    this.guessAnyItemExposure[this.hotlistDatas[j].appid] = 1;
-                }
-            }
-            this.visible = true;
-            this.guessUI.visible = true;
-            this.guessAnylistAutoScroll();
-        }
-        guessAnylistAutoScroll() {
-            if (!this.guessUI.visible)
-                return;
-            if (this.hotlistDatas.length <= 4) {
-                return;
-            }
-            var self = this;
-            var endIndex = self.hotlistDatas.length - 4;
-            var dur = endIndex * 5000;
-            if (self.guesslist.startIndex < endIndex - 1) {
-                this.guesslist.tweenTo(endIndex, dur, new Laya.Handler(this, this.guessAnylistAutoScroll));
-            }
-            else {
-                this.guesslist.tweenTo(0, dur, new Laya.Handler(this, this.guessAnylistAutoScroll));
-            }
-        }
-        onGuessLikeItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.hotlistDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-            }
-            else if (e.type == 'mouseover') {
-                this.checkExposure();
-            }
-        }
-        checkExposure() {
-            if (this.guessUI.visible) {
-                for (var i = 0; i < this.guesslist.length; i++) {
-                    var temItem = this.guesslist.getItem(i);
-                    if (temItem && this.guesslist.getItem(i)) {
-                        var infoData = this.guesslist.getItem(i).infoData;
-                        if (temItem.y < 464 && !this.guessAnyItemExposure[infoData.appid]) {
-                            this.guessAnyItemExposure[infoData.appid] = 1;
-                            Laya.Browser.window.YouziDataManager.sendExposureLog(infoData, 4);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    class YouziMainPush extends ui.youzi.Youzi_MainPushUI {
-        constructor() {
-            super();
-            this.mainRecDatas = [];
-            this.mainRecItemExposure = {};
-            this.angel = 0;
-            this.curMainRecIdx = 0;
-            this.visible = false;
-            this.btnMainRecBg.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.pos(x, y);
-        }
-        onEnable() {
-            var isMainDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (isMainDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.mainRecDatas = Laya.Browser.window.YouziDataManager.mainRecDatas;
-            if (this.mainRecDatas.length > 0) {
-                this.btnMainRec.on(Laya.Event.CLICK, this, this.onBtnMainRecClicked);
-                this.visible = true;
-                this.btnMainRecBg.visible = true;
-                this.btnMainRec.loadImage(this.mainRecDatas[0].iconImg);
-                Laya.timer.frameLoop(1, this, this.updateMainRec);
-                var txt = this.btnMainRec.getChildByName('slogan');
-                if (this.mainRecDatas[0].slogan) {
-                    txt.text = this.mainRecDatas[0].slogan;
-                }
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.mainRecDatas[0], 1);
-                this.mainRecItemExposure[this.mainRecDatas[0].appid] = 1;
-            }
-        }
-        updateMainRec(e) {
-            this.angel += 0.03;
-            if (this.angel % 15 < 0.03) {
-                this.mainRecChange();
-            }
-            this.btnMainRecBg.rotation = Math.sin(this.angel) * 10;
-        }
-        mainRecChange() {
-            this.curMainRecIdx = this.curMainRecIdx + 1 >= this.mainRecDatas.length ? 0 : this.curMainRecIdx + 1;
-            this.btnMainRec.loadImage(this.mainRecDatas[this.curMainRecIdx].iconImg);
-            var txt = this.btnMainRec.getChildByName('slogan');
-            if (this.mainRecDatas[this.curMainRecIdx].slogan) {
-                txt.text = this.mainRecDatas[this.curMainRecIdx].slogan;
-            }
-            if (!this.mainRecItemExposure[this.mainRecDatas[this.curMainRecIdx].appid]) {
-                Laya.Browser.window.YouziDataManager.sendExposureLog(this.mainRecDatas[this.curMainRecIdx], 1);
-                this.mainRecItemExposure[this.mainRecDatas[this.curMainRecIdx].appid] = 1;
-            }
-        }
-        onBtnMainRecClicked() {
-            var tmpData = this.mainRecDatas[this.curMainRecIdx];
-            tmpData.locationIndex = this.curMainRecIdx;
-            tmpData.type = 4;
-            if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-            }
-            this.mainRecChange();
-        }
-    }
-
-    class YouziOffLine extends ui.youzi.Youzi_OffLineUI {
-        constructor() {
-            super();
-            this.offLineGameShow = [];
-            this.offLineGameDatas = [];
-            this.offLineCreateComplete = false;
-            this.hideOffLineGameTimes = 0;
-            if (Laya.stage.height / Laya.stage.width >= 1.9) {
-                this.OffLineUI.pos(Laya.stage.width / 2 - this.OffLineUI.width / 2, Laya.stage.height / 2 - this.OffLineUI.height / 2);
-            }
-            else {
-                this.centerX = 0;
-                this.centerY = 0;
-            }
-            this.visible = false;
-            this.OffLineUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.OffLineUI.pos(x, y);
-        }
-        onEnable() {
-            var offLineDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (offLineDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.offLineGameDatas = Laya.Browser.window.YouziDataManager.offlineBannerDatas;
-            this.wxOnShow();
-            this.wxOnHide();
-        }
-        wxOnShow() {
-            var self = this;
-            if (Laya.Browser.window.wx) {
-                Laya.Browser.window.wx.onShow(function (res) {
-                    var showOffLineTimes = Math.floor(new Date().getTime() - self.hideOffLineGameTimes);
-                    var showOffLineTimeSecond = Math.floor(showOffLineTimes / 1000);
-                    if (showOffLineTimeSecond >= 8) {
-                        if (self.offLineCreateComplete) {
-                            self.visible = true;
-                            self.OffLineUI.visible = true;
-                            for (var i = 0; i < self.offLineGameShow.length; i++) {
-                                Laya.Browser.window.YouziDataManager.sendExposureLog(self.offLineGameShow[i], 6);
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        wxOnHide() {
-            var self = this;
-            if (Laya.Browser.window.wx) {
-                Laya.Browser.window.wx.onHide(function () {
-                    self.hideOffLineGameTimes = new Date().getTime();
-                    if (self.offLineGameDatas.length > 0 && !self.offLineCreateComplete) {
-                        self.createOffLineDialog();
-                    }
-                });
-            }
-        }
-        createOffLineDialog() {
-            this.OffLineCloseButton.on(Laya.Event.CLICK, this, this.onBtnOffLineClose);
-            var offLineArr = [];
-            for (var i = 0; i < this.offLineGameDatas.length; i++) {
-                if (i >= 3) {
-                    break;
-                }
-                else {
-                    var tempOffLine = this.offLineGameDatas[i];
-                    offLineArr.push({ infoData: tempOffLine, namelab: tempOffLine.title });
-                }
-            }
-            switch (offLineArr.length) {
-                case 1:
-                    this.OffLineList.width = 140;
-                    this.OffLineList.x = 194;
-                    break;
-                case 2:
-                    this.OffLineList.width = 305;
-                    this.OffLineList.x = 111.5;
-                    break;
-                default:
-                    break;
-            }
-            this.OffLineList.mouseHandler = new Laya.Handler(this, this.onOffLinelistItemMouseEvent);
-            this.OffLineList.dataSource = offLineArr;
-            for (var j = 0; j < this.offLineGameDatas.length; j++) {
-                var offLineIcon = this.OffLineList.getCell(j).getChildByName('icon');
-                offLineIcon.loadImage(this.offLineGameDatas[j].iconImg);
-                var offLineIconRedHit = offLineIcon.getChildByName('redhit');
-                offLineIconRedHit.visible = false;
-                if (this.offLineGameDatas[j].hotred == 1) {
-                    offLineIconRedHit.visible = true;
-                }
-                this.offLineGameShow.push(this.offLineGameDatas[j]);
-                if (++j >= offLineArr.length) {
-                    this.offLineCreateComplete = true;
-                    break;
-                }
-            }
-        }
-        onBtnOffLineClose() {
-            this.visible = false;
-            this.OffLineUI.visible = false;
-        }
-        onOffLinelistItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.offLineGameDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.hotred == 1) {
-                    var hideOffLineHit = this.OffLineList.getCell(index).getChildByName('icon').getChildByName('redhit');
-                    hideOffLineHit.visible = false;
-                }
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-            }
-            else if (e.type == 'mouseover') ;
-            else if (e.type == 'mouseout') ;
-        }
-    }
-
-    class YouziOffLineH extends ui.youzi.Youzi_OffLineHUI {
-        constructor() {
-            super();
-            this.offLineGameShow = [];
-            this.offLineGameDatas = [];
-            this.offLineCreateComplete = false;
-            this.hideOffLineGameTimes = 0;
-            if (Laya.stage.width / Laya.stage.height >= 1.9) {
-                this.OffLineUI.pos(Laya.stage.width / 2 - this.OffLineUI.width / 2, Laya.stage.height / 2 - this.OffLineUI.height / 2);
-            }
-            else {
-                this.centerX = 0;
-                this.centerY = 0;
-            }
-            this.visible = false;
-            this.OffLineUI.visible = false;
-        }
-        setYouziPosition(x, y) {
-            this.centerX = NaN;
-            this.centerY = NaN;
-            this.OffLineUI.pos(x, y);
-        }
-        onEnable() {
-            var offLineDataOk = Laya.Browser.window.YouziDataManager.isDataLoaded;
-            if (offLineDataOk) {
-                this.initShow();
-            }
-            else {
-                Laya.Browser.window.YouziDataManager.loadedCallBacks.push(this.initShow.bind(this));
-            }
-        }
-        initShow() {
-            this.offLineGameDatas = Laya.Browser.window.YouziDataManager.offlineBannerDatas;
-            this.wxOnShow();
-            this.wxOnHide();
-        }
-        wxOnShow() {
-            var self = this;
-            if (Laya.Browser.window.wx) {
-                Laya.Browser.window.wx.onShow(function (res) {
-                    var showOffLineTimes = Math.floor(new Date().getTime() - self.hideOffLineGameTimes);
-                    var showOffLineTimeSecond = Math.floor(showOffLineTimes / 1000);
-                    if (showOffLineTimeSecond >= 8) {
-                        if (self.offLineCreateComplete) {
-                            self.visible = true;
-                            self.OffLineUI.visible = true;
-                            for (var i = 0; i < self.offLineGameShow.length; i++) {
-                                Laya.Browser.window.YouziDataManager.sendExposureLog(self.offLineGameShow[i], 6);
-                            }
-                        }
-                    }
-                });
-            }
-        }
-        wxOnHide() {
-            var self = this;
-            if (Laya.Browser.window.wx) {
-                Laya.Browser.window.wx.onHide(function () {
-                    self.hideOffLineGameTimes = new Date().getTime();
-                    if (self.offLineGameDatas.length > 0 && !self.offLineCreateComplete) {
-                        self.createOffLineDialog();
-                    }
-                });
-            }
-        }
-        createOffLineDialog() {
-            this.OffLineCloseButton.on(Laya.Event.CLICK, this, this.onBtnOffLineClose);
-            var offLineArr = [];
-            for (var i = 0; i < this.offLineGameDatas.length; i++) {
-                if (i >= 3) {
-                    break;
-                }
-                else {
-                    var tempOffLine = this.offLineGameDatas[i];
-                    offLineArr.push({ infoData: tempOffLine, namelab: tempOffLine.title });
-                }
-            }
-            var offLineListPostionX = 0;
-            switch (offLineArr.length) {
-                case 1:
-                    offLineListPostionX = 205;
-                    break;
-                case 2:
-                    offLineListPostionX = 85;
-                    this.OffLineList.spaceX = 50;
-                    break;
-                default:
-                    offLineListPostionX = 8;
-                    this.OffLineList.spaceX = 15;
-                    break;
-            }
-            this.OffLineList.x = offLineListPostionX;
-            this.OffLineList.mouseHandler = new Laya.Handler(this, this.onOffLinelistItemMouseEvent);
-            this.OffLineList.dataSource = offLineArr;
-            for (var j = 0; j < this.offLineGameDatas.length; j++) {
-                var offLineIcon = this.OffLineList.getCell(j).getChildByName('icon');
-                offLineIcon.loadImage(this.offLineGameDatas[j].iconImg);
-                var offLineIconRedHit = offLineIcon.getChildByName('redhit');
-                offLineIconRedHit.visible = false;
-                if (this.offLineGameDatas[j].hotred == 1) {
-                    offLineIconRedHit.visible = true;
-                }
-                this.offLineGameShow.push(this.offLineGameDatas[j]);
-                if (++j >= offLineArr.length) {
-                    this.offLineCreateComplete = true;
-                    break;
-                }
-            }
-        }
-        onBtnOffLineClose() {
-            this.visible = false;
-            this.OffLineUI.visible = false;
-        }
-        onOffLinelistItemMouseEvent(e, index) {
-            if (e.type == 'mousedown') ;
-            else if (e.type == 'mouseup') {
-                console.log("当前选择的hotlist索引：" + index);
-                var tmpData = this.offLineGameDatas[index];
-                tmpData.locationIndex = index;
-                tmpData.type = 3;
-                if (tmpData.hotred == 1) {
-                    var hideOffLineHit = this.OffLineList.getCell(index).getChildByName('icon').getChildByName('redhit');
-                    hideOffLineHit.visible = false;
-                }
-                if (tmpData.codeJump == 1 && (tmpData.vopencode || tmpData.hopencode || tmpData.chopencode)) {
-                    Laya.Browser.window.YouziDataManager.previewImage(tmpData);
-                }
-                else {
-                    Laya.Browser.window.YouziDataManager.navigateToOtherGame(tmpData);
-                }
-            }
-            else if (e.type == 'mouseover') ;
-            else if (e.type == 'mouseout') ;
-        }
-    }
-
-    class YouziCenter {
-        constructor() {
-            this.tempMoreGameUI = null;
-            this.tempMoreGameUIH = null;
-            this.tempSlideUI = null;
-            this.tempSlideUIH = null;
-        }
-        static getInstance() {
-            if (this.instance == null) {
-                this.instance = new YouziCenter();
-            }
-            return this.instance;
-        }
-        initYouzi(wxappId, wxBannerAdId, sdkVersion) {
-            Laya.Browser.window.YouziDataManager.appid = wxappId;
-            Laya.Browser.window.YouziDataManager.adUnitId = wxBannerAdId;
-            Laya.Browser.window.YouziDataManager.sdkVersion = sdkVersion;
-            Laya.Browser.window.YouziDataManager.wxLaunch();
-            if (Laya.Browser.window.wx) {
-                Laya.Browser.window.wx.onShow(function (res) {
-                    Laya.Browser.window.YouziDataManager.wxOnShow(res);
-                });
-            }
-            Laya.Browser.window.YouziDataManager.loadData(null);
-        }
-        createMoreGameButton(parentNode, params, isAutoClick) {
-            var moreGameBtn = new Laya.Button('comp/btn-entrance-nogift.png');
-            moreGameBtn.mouseEnabled = true;
-            moreGameBtn.stateNum = 1;
-            moreGameBtn.width = params.width;
-            moreGameBtn.height = params.height;
-            moreGameBtn.pos(params.x, params.y);
-            parentNode.addChild(moreGameBtn);
-            if (isAutoClick) {
-                moreGameBtn.on(Laya.Event.CLICK, this, this.showMoreGameUI);
-            }
-            return moreGameBtn;
-        }
-        showMoreGameUI() {
-            if (Laya.stage.width > Laya.stage.height) {
-                if (this.tempMoreGameUIH)
-                    this.tempMoreGameUIH.showMoreGameUI();
-            }
-            else {
-                if (this.tempMoreGameUI)
-                    this.tempMoreGameUI.showMoreGameUI();
-            }
-        }
-        createMoreGameUI(parentNode, params) {
-            var moreGameUI = new YouziMoreGame();
-            if (params) {
-                moreGameUI.setYouziPosition(params.x, params.y);
-            }
-            this.tempMoreGameUI = moreGameUI;
-            parentNode.addChild(moreGameUI);
-            return moreGameUI;
-        }
-        createMoreGameUIH(parentNode, params) {
-            var moreGameUIH = new YouziMoreGameH();
-            if (params) {
-                moreGameUIH.setYouziPosition(params.x, params.y);
-            }
-            this.tempMoreGameUIH = moreGameUIH;
-            parentNode.addChild(moreGameUIH);
-            return moreGameUIH;
-        }
-        createSlideButton(parentNode, params, leftOrRight, isAutoClick) {
-            var slideBtn = new Laya.Button('comp/btn_slide.png');
-            slideBtn.mouseEnabled = true;
-            slideBtn.stateNum = 1;
-            if (leftOrRight) {
-                slideBtn.scaleX = -1;
-            }
-            slideBtn.width = params.width;
-            slideBtn.height = params.height;
-            slideBtn.pos(params.x, params.y);
-            parentNode.addChild(slideBtn);
-            if (isAutoClick)
-                slideBtn.on(Laya.Event.CLICK, this, this.showSlideWindowUI);
-            return slideBtn;
-        }
-        showSlideWindowUI() {
-            console.log('1111111');
-            if (Laya.stage.width > Laya.stage.height) {
-                if (this.tempSlideUIH)
-                    this.tempSlideUIH.showSlideWindow();
-            }
-            else {
-                if (this.tempSlideUI)
-                    this.tempSlideUI.showSlideWindow();
-            }
-        }
-        createSlideWindowUI(parentNode, params, leftOrRight) {
-            var slideWindowUI = new YouziSlideWindow(leftOrRight);
-            if (params) {
-                slideWindowUI.setYouziPosition(params.y);
-            }
-            this.tempSlideUI = slideWindowUI;
-            parentNode.addChild(slideWindowUI);
-            return slideWindowUI;
-        }
-        createSlideWindowUIH(parentNode, params, leftOrRight) {
-            var slideWindowUIH = new YouziSlideWindowH(leftOrRight);
-            if (params) {
-                slideWindowUIH.setYouziPosition(params.y);
-            }
-            this.tempSlideUIH = slideWindowUIH;
-            parentNode.addChild(slideWindowUIH);
-            return slideWindowUIH;
-        }
-        createBottomBanner(parentNode, params) {
-            var bottomBanner = new YouziBottomBanner();
-            if (params) {
-                bottomBanner.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(bottomBanner);
-            return bottomBanner;
-        }
-        createGuessLike(parentNode, params) {
-            var guessLike = new YouziGuessLike();
-            if (params) {
-                guessLike.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(guessLike);
-            return parentNode;
-        }
-        createGuessLikeH(parentNode, params) {
-            var guessLikeH = new YouziGuessLikeH();
-            if (params) {
-                guessLikeH.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(guessLikeH);
-            return guessLikeH;
-        }
-        createMainPush(parentNode, params) {
-            var mainPush = new YouziMainPush();
-            if (params) {
-                mainPush.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(mainPush);
-            return mainPush;
-        }
-        createOffline(parentNode, params) {
-            var offlineUI = new YouziOffLine();
-            if (params) {
-                offlineUI.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(offlineUI);
-            return offlineUI;
-        }
-        createOfflineH(parentNode, params) {
-            var offlineUIH = new YouziOffLineH();
-            if (params) {
-                offlineUIH.setYouziPosition(params.x, params.y);
-            }
-            parentNode.addChild(offlineUIH);
-            return offlineUIH;
-        }
-    }
-    YouziCenter.instance = null;
-
     class LeuokSession extends Session {
         constructor() {
             super();
             this.newerSession = null;
             this.sdkSession = null;
-            this.box = null;
             this.dataSession = null;
-            this.showWall = false;
-            this.wallTimes = 0;
             this.closeBanner = new MyArray();
             App.onceEvent(GameEvent.ENTER_SCENE, this, this.enterFun);
             App.onEvent(MyEvent.GOLD_UPDATE, this, this.goldFun);
         }
         goldFun(oldGold, newGold, type) {
-            let o = {};
-            o.reason = type;
-            o.moneyType = 2;
-            o.oldMoney = oldGold;
-            o.newMoney = newGold;
-            this.getRoot().money(o);
         }
         enterFun(url) {
-            this.getRoot().adLogin({ "nickName": this.sdkSession.wxName });
             this.loadFun();
         }
         loadFun() {
@@ -10705,25 +9218,15 @@
             Laya.timer.callLater(this, this.nextFun);
         }
         initAll() {
-            this.box = new ui.youzi.YouZiBoxUI();
-            this.box.height = Laya.stage.height;
-            this.box.mouseThrough = true;
-            Laya.stage.addChild(this.box);
-            YouziCenter.getInstance().initYouzi("wxb45b791f8e76153d", "", "1.00.00");
-            YouziCenter.getInstance().createMainPush(this.box.zhuTui, { x: 0, y: 0 });
-            YouziCenter.getInstance().createSlideButton(this.box.chouTi, { x: 80, y: 0, width: 80, height: 74 }, true, true);
-            this.win = YouziCenter.getInstance().createSlideWindowUI(this.box, { x: 0, y: 250 }, true);
-            this.win.btnSLideClose.zOrder = 10000;
-            YouziCenter.getInstance().createBottomBanner(this.box.bottomBox, { x: (Laya.stage.width - 640) / 2, y: 0 });
+            App.onEvent(GameEvent.OPEN_DIALOG, this, this.openDialogFun);
             App.onEvent(GameEvent.ENTER_SCENE, this, this.enterSceneFun);
+            App.onEvent(GameEvent.CLOSE_DIALOG, this, this.closeDialogFun);
             if (this.newerSession.isNew) {
                 this.setNowUrl("", 0);
             }
         }
         openSceneStartFun(url) {
-            if (url == MyGameInit.MainScene && App.getInstance().nowSceneUrl == MyGameInit.BattleScene) {
-                this.showWall = true;
-            }
+            if (url == MyGameInit.MainScene && App.getInstance().nowSceneUrl == MyGameInit.BattleScene) ;
         }
         closeDialogFun(url) {
             console.log("关闭窗口:", url);
@@ -10732,22 +9235,8 @@
                 this.closeBanner.clear();
             }
             Laya.timer.callLater(this, this.nextFun);
-            if (url == MyGameInit.RankDialog) {
-                Laya.timer.callLater(this, this.nextCloseFun);
-            }
-            else if (url == MyGameInit.TimeGoldDialog) {
-                Laya.timer.callLater(this, this.nextCloseFun);
-            }
         }
         nextCloseFun() {
-            if (this.wallTimes >= 2) {
-                return;
-            }
-            let ddd = this.wall.getChildByName("maskButton");
-            ddd.scale(2, 2);
-            this.wall.showMoreGameUI();
-            this.wallTimes++;
-            this.wall.visible = true;
         }
         nextFun() {
             if (Laya.Dialog.manager.numChildren == 0) {
@@ -10773,102 +9262,63 @@
         heziFun() {
         }
         setNowUrl(url, type = 0) {
-            Laya.stage.addChild(this.box);
-            this.box.zOrder = 1000;
-            for (let a = 0; a < this.box.numChildren; a++) {
-                let sp = this.box.getChildAt(a);
-                sp.visible = false;
-            }
+            console.log("要显示banner了");
             if (url == MyGameInit.MainScene) {
                 this.setShow([LeuokSession.ZHUTUI, LeuokSession.CHOUTI]);
             }
             else if (url == MyGameInit.RoleDialog) ;
             else if (url == MyGameInit.TimeGoldDialog) {
-                this.showBanner(url, "adunit-7a2063d328547c2e");
+                this.showBanner(url, "146702");
             }
             else if (url == MyGameInit.TreasureDialog) {
-                this.showBanner(url, "adunit-3cd8214ae603f211");
+                this.showBanner(url, "146703");
             }
             else if (url == MyGameInit.RankDialog) {
-                this.showBanner(url, "adunit-04b091330f81a643");
+                this.showBanner(url, "146704");
             }
             else if (url == MyGameInit.GetGoldDialog) {
-                this.showBanner(url, "adunit-bf6316b9d48e40fe");
+                this.showBanner(url, "146705");
             }
             else if (url == MyGameInit.SettingDialog) {
-                this.showBanner(url, "adunit-a7f05f24fa0c3f97");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.SelectStage || url == MyGameInit.SelectStage2) {
-                this.setShow([LeuokSession.ZHUTUI, LeuokSession.BOTTOMBOX]);
-                this.box.bottomBox.bottom = 0;
-                this.showBanner(url, "adunit-75ac31709ab86ae8");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.BattleScene) ;
             else if (url == MyGameInit.GameOverDialog) {
-                this.setShow([LeuokSession.ZHUTUI, LeuokSession.BOTTOMBOX]);
-                this.box.bottomBox.bottom = null;
-                this.box.bottomBox.y = 450;
-                this.showBanner(url, "adunit-75ac31709ab86ae8");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.TASK) {
-                this.showBanner(url, "adunit-00ab202e45ebc70e");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.ZHUAN) {
-                this.showBanner(url, "adunit-3b85f33cbf452811");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.FlyBoxDialog) {
-                this.showBanner(url, "adunit-66271589f4d78a21");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.SHARE_MERGE_DIALOG) {
-                this.showBanner(url, "adunit-fd9db47faafd1a59");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.AD_MERGE_DIALOG) {
-                this.showBanner(url, "adunit-5ff2b8db28a455e7");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.TIANFU) {
-                this.showBanner(url, "adunit-9d7c2a81711db63f");
+                this.showBanner(url, "146706");
             }
             else if (url == MyGameInit.TASK_REWARD) {
-                this.showBanner(url, "adunit-d517a866f9ab34bc");
+                this.showBanner(url, "146706");
             }
         }
         showBanner(url, code) {
+            console.log("调用banner接口");
             this.sdkSession.showBanner(code);
             this.closeBanner.push(url);
         }
-        clickFun() {
-            return;
-            this.win.visible = true;
-            this.win.showSlideWindow();
-            this.box.mouseThrough = false;
-            Laya.timer.callLater(this, this.nFun);
-        }
-        nFun() {
-            Laya.stage.once(Laya.Event.CLICK, this, this.sClickFun);
-        }
-        sClickFun() {
-            this.win.closeSlideWindow();
-        }
         setShow(arr) {
-            for (let a of arr) {
-                let c = this.box.getChildByName(a);
-                c.visible = true;
-                c.on(Laya.Event.CLICK, this, this.clickFun);
-            }
-            this.win.visible = false;
-            this.win.closeSlideWindow();
-        }
-        getRoot() {
-            return Laya.Browser.window.wx.leuok;
-        }
-        onSHARE_START(type) {
-            this.getRoot().sharedOut({ "type": type });
         }
         onAD_EVENT(subType, type) {
-            let obj = {};
-            obj.type = type;
-            obj.subType = subType;
-            this.getRoot().adVideo(obj);
         }
     }
     LeuokSession.ZHUTUI = "zhuTui";
@@ -10907,6 +9357,7 @@
             this.dialog.v1.sharebox.visible = true;
             this.dialog.v1.adbox.visible = false;
             this.dialog.v1.AdBtn.clickHandler = new Laya.Handler(this, this.cFun);
+            this.dialog.v1.AdBtn.visible = false;
             this.dialog.v1.ani1.play(0, true);
         }
         cFun() {
@@ -11071,9 +9522,7 @@
             this.app.regSession(TianFuSession);
             this.app.regSession(TaskSession);
             this.app.regSession(TreasureSession);
-            if (Laya.Browser.onMiniGame) {
-                this.app.regSession(LeuokSession);
-            }
+            this.app.regSession(LeuokSession);
         }
         initAction() {
         }
@@ -11156,6 +9605,60 @@
     MyGameInit.sys_mission = "sys_mission.txt";
     MyGameInit.sys_talentinfo = "sys_talentinfo.txt";
 
+    class ZipLoader {
+        constructor() {
+            this.handler = null;
+            this.fileNameArr = [];
+            this.resultArr = [];
+        }
+        static load(fileName, handler) {
+            ZipLoader.instance.loadFile(fileName, handler);
+        }
+        loadFile(fileName, handler) {
+            this.handler = handler;
+            Laya.loader.load(fileName, new Laya.Handler(this, this.zipFun), null, Laya.Loader.BUFFER);
+        }
+        zipFun(ab) {
+            var self = this;
+            Laya.Browser.window.JSZip.loadAsync(ab).then(function (jszip) {
+                self.analysisFun(jszip);
+            });
+        }
+        analysisFun(jszip) {
+            this.currentJSZip = jszip;
+            for (var fileName in jszip.files) {
+                this.fileNameArr.push(fileName + "");
+            }
+            this.exeOne();
+        }
+        exeOne() {
+            let self = this;
+            let f = this.currentJSZip.file(this.fileNameArr[this.fileNameArr.length - 1]);
+            if (f) {
+                f.async('string').then(function (content) {
+                    self.over(content);
+                });
+            }
+            else {
+                this.over(null);
+            }
+        }
+        over(content) {
+            let fileName = this.fileNameArr.pop();
+            if (content) {
+                this.resultArr.push(fileName);
+                this.resultArr.push(content);
+            }
+            if (this.fileNameArr.length != 0) {
+                this.exeOne();
+            }
+            else {
+                this.handler.runWith([this.resultArr]);
+            }
+        }
+    }
+    ZipLoader.instance = new ZipLoader();
+
     class LoadView extends ui.scene.LoadViewUI {
         constructor() {
             super();
@@ -11193,20 +9696,29 @@
         }
     }
 
+    class MyDeBug {
+        constructor() {
+        }
+        static trace(txt) {
+            return;
+            let a = Laya.stage.getChildByName("ttt");
+            if (a == null) {
+                a = new Laya.Text();
+                Laya.stage.addChild(a);
+                a.width = Laya.stage.width;
+                a.height = Laya.stage.height;
+                a.fontSize = 50;
+                a.color = "#ffffff";
+                a.zOrder = 1000001;
+                a.name = "ttt";
+            }
+            a.text += ("\n" + txt);
+        }
+    }
+
     class Main {
         constructor() {
             this.t = null;
-            this.tables = ["sys_stagemap.txt",
-                "sys_stageinfo.txt",
-                "sys_enemy.txt",
-                "sys_item.txt",
-                "sys_compose.txt",
-                "sys_pet.txt",
-                "sys_skill.txt",
-                "sys_talent.txt",
-                "sys_talentcost.txt",
-                "sys_mission.txt",
-                "sys_talentinfo.txt"];
             UIConfig.closeDialogOnSide = false;
             Laya.MouseManager.multiTouchEnabled = false;
             if (window["Laya3D"])
@@ -11225,23 +9737,10 @@
             if (GameConfig.stat)
                 Laya.Stat.show();
             Laya.alertGlobalError = true;
-            if (Laya.Browser.onMiniGame == false) {
-                Laya.Stat.show();
-            }
+            if (Laya.Browser.onMiniGame == false) ;
             Laya.stage.bgColor = "#000000";
             UIConfig.popupBgAlpha = 0.7;
-            Laya.URL.basePath = "https://img.kuwan511.com/rideGame/oppo/" + DataSession.GAME_VER + "/";
-            if (Laya.Browser.onMiniGame) ;
-            else {
-                Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
-                if (Laya.Browser.onPC) {
-                    Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
-                }
-                else {
-                    Laya.stage.screenMode = Laya.Stage.SCREEN_VERTICAL;
-                }
-                Laya.stage.alignH = "center";
-            }
+            Laya.URL.basePath = "https://img.kuwan511.com/rideGame/" + DataSession.GAME_VER + "/";
             Laya.ClassUtils.regClass("laya.ui.WXOpenDataViewer", Laya.WXOpenDataViewer);
             Laya.ClassUtils.regClass("Laya.WXOpenDataViewer", Laya.WXOpenDataViewer);
             this.t = new Laya.Text();
@@ -11252,12 +9751,24 @@
             this.setText("正在加载config文件");
             Laya.loader.load("config.json?ver=" + Math.random(), new Laya.Handler(this, this.configFun), null, Laya.Loader.JSON);
             DataSession.staticLog(LogType.LOAD_CONFIG);
+            Laya.Browser.window.wx = Laya.Browser.window.qg;
         }
         configFun(configJson) {
-            DataSession.staticLog(LogType.LOAD_CONFIG_ERR);
-            MyConfig.IP = "https://st.kuwan511.com/";
-            MyConfig.PLATFORM = 0;
-            MyConfig.TEST = 0;
+            try {
+                DataSession.staticLog(LogType.LOAD_VERSION, JSON.stringify(configJson));
+                MyConfig.IP = configJson.IP;
+                MyConfig.PLATFORM = configJson.PLATFORM;
+                MyConfig.TEST = configJson.TEST;
+                if (MyConfig.PLATFORM == 10) {
+                    Laya.URL.basePath = "https://img.kuwan511.com/rideGame/4.2.0/";
+                }
+            }
+            catch (error) {
+                DataSession.staticLog(LogType.LOAD_CONFIG_ERR);
+                MyConfig.IP = "https://st.kuwan511.com/";
+                MyConfig.PLATFORM = 1;
+                MyConfig.TEST = 0;
+            }
             this.loadVersion();
             this.setText("正在加载version文件");
         }
@@ -11284,6 +9795,7 @@
             Laya.loader.load("res/atlas/loading.atlas", new Laya.Handler(this, this.uiFun));
         }
         uiFun(arr) {
+            MyDeBug.trace("ui");
             this.setText("正在加载游戏配置文件");
             App.getInstance().init();
             let lv = new LoadView2();
@@ -11291,27 +9803,18 @@
             Laya.Scene.setLoadingPage(lv);
             Laya.Scene.showLoadingPage();
             Laya.SoundManager.setMusicVolume(0.2);
+            MyDeBug.trace("1");
             App.getInstance().initEvent(GameEvent);
             App.getInstance().initEvent(MyEvent);
             App.getInstance().setGameInit(MyGameInit);
+            MyDeBug.trace("2");
             Laya.Dialog.manager.setLockView(new LoadView());
-            let arrTables = [];
-            for (let i = 0; i < this.tables.length; i++) {
-                arrTables.push("config/" + this.tables[i]);
-            }
-            Laya.loader.load(arrTables, new Laya.Handler(this, this.onTabalesCom));
+            MyDeBug.trace("3");
+            ZipLoader.load("config.zip?ver=" + Math.random(), new Laya.Handler(this, this.zipFun));
             DataSession.staticLog(LogType.LOAD_CONFIGZIP);
         }
         zipFun(arr) {
             App.getInstance().configManager.init(arr);
-            SysItem.init();
-            SysStageInfo.init();
-            App.sendEvent(MyEvent.LOGIN);
-            MyEffect.init();
-            this.t.removeSelf();
-        }
-        onTabalesCom() {
-            App.getInstance().configManager.init(this.tables);
             SysItem.init();
             SysStageInfo.init();
             App.sendEvent(MyEvent.LOGIN);

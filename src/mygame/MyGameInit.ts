@@ -62,10 +62,7 @@ export default class MyGameInit implements IGameInit {
         this.app.regSession(TianFuSession);
         this.app.regSession(TaskSession);
         this.app.regSession(TreasureSession);
-        //根据平台注册
-        if( Laya.Browser.onMiniGame ){
-            this.app.regSession( LeuokSession );
-        }
+        this.app.regSession( LeuokSession );
     }
 
     public initAction(): void {

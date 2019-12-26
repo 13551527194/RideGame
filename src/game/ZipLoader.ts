@@ -1,3 +1,5 @@
+import MyDeBug from "../MyDeBug";
+
 export default class ZipLoader{
     constructor(){
 
@@ -38,24 +40,32 @@ export default class ZipLoader{
     public exeOne():void {
         let self:ZipLoader = this;
         let f = this.currentJSZip.file( this.fileNameArr[this.fileNameArr.length-1] );
+        //console.log("ccccccccc" , f);
         if( f ){
             f.async('string').then(function(content):void{
+               // console.log("aaaaaaaaaaaaaaa");
                 self.over(content);
             });
         }else{
+            //console.log("bbbbbbbbbbbbbbbb");
             this.over( null );
         }
     }
 
     public over(content):void{
+        //console.log("dddddddddddddd" , content  );
+        //console.log("eeeeeeeeeeeeee" , this.fileNameArr   );
         let fileName:string = this.fileNameArr.pop();
+        
         if( content ){
             this.resultArr.push(fileName);
             this.resultArr.push(content);
         }
         if( this.fileNameArr.length != 0 ){
             this.exeOne();
+            //console.log("iiiiiiiiiiiii");
         }else{
+            //console.log("ooooooooooooo");
             this.handler.runWith([this.resultArr]);
         }
     }

@@ -162,12 +162,13 @@ export default class App {
         disInstance.once(Laya.Event.UNDISPLAY,this,this.undisFun,[mInstance,url]);
         
         if( disInstance instanceof Laya.Dialog ){
+            disInstance.isShowEffect = false
             if( disInstance.isShowEffect == false ){
                 disInstance.popup( closeOther , false );
             }else{
                 disInstance.isShowEffect = false;
                 disInstance.open( closeOther );
-                this.dialogEff( disInstance );
+                // this.dialogEff( disInstance );
             }
             disInstance.url = url;
             this.eventManager.event(GameEvent.OPEN_DIALOG , url );
@@ -441,6 +442,7 @@ export default class App {
             url = url + "?" + data;
             data = null;
         }
+        console.log("访问地址:" + url );
         http.send(url,data,method);
         if( caller && listener ){
             http.once(Laya.Event.COMPLETE,caller,listener,args );

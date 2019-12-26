@@ -1,0 +1,1 @@
+{"type":"View","props":{"width":227,"height":14},"compId":2,"child":[{"type":"Image","props":{"y":0,"x":0,"var":"di","skin":"battlescene/guaitiaoxia.png"},"compId":3},{"type":"Image","props":{"y":0,"x":0,"var":"bloodImg","skin":"battlescene/guaitiaoshang.png"},"compId":4}],"loadList":["battlescene/guaitiaoxia.png","battlescene/guaitiaoshang.png"],"loadList3D":[]}

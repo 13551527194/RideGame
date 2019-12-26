@@ -13,6 +13,7 @@ import { ui } from "./ui/layaMaxUI";
 import LoadView2 from "./mygame/scene/LoadView2";
 import LogType from "./mygame/session/LogType";
 import MyConfig from "./MyConfig";
+import MyDeBug from "./MyDeBug";
 
 class Main {
 
@@ -37,23 +38,22 @@ class Main {
 		if (GameConfig.stat) Laya.Stat.show();
 		Laya.alertGlobalError = true;
 		if( Laya.Browser.onMiniGame == false ){
-			Laya.Stat.show();
+			//Laya.Stat.show();
 		}
 		Laya.stage.bgColor = "#000000";
 		UIConfig.popupBgAlpha = 0.7;
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
-		Laya.URL.basePath = "https://img.kuwan511.com/rideGame/oppo/" + DataSession.GAME_VER + "/";
-		if( Laya.Browser.onMiniGame ){
-			
-		}else{
-			Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
-			if( Laya.Browser.onPC ){
-				Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
-			}else{
-				Laya.stage.screenMode = Laya.Stage.SCREEN_VERTICAL;
-			}
-			Laya.stage.alignH = "center"; 
-		}
+		// if( Laya.Browser.onMiniGame ){
+			Laya.URL.basePath = "https://img.kuwan511.com/rideGame/" + DataSession.GAME_VER + "/";
+		// }else{
+		// 	Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+		// 	if( Laya.Browser.onPC ){
+		// 		Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
+		// 	}else{
+		// 		Laya.stage.screenMode = Laya.Stage.SCREEN_VERTICAL;
+		// 	}
+		// 	Laya.stage.alignH = "center"; 
+		// }
 		
 		Laya.ClassUtils.regClass("laya.ui.WXOpenDataViewer", Laya.WXOpenDataViewer );
 		Laya.ClassUtils.regClass("Laya.WXOpenDataViewer", Laya.WXOpenDataViewer );
@@ -65,26 +65,30 @@ class Main {
 		Laya.stage.addChild( this.t );
 		this.setText( "正在加载config文件" );
 
-		// return;
+		//return;
 		Laya.loader.load("config.json?ver=" + Math.random()  , new Laya.Handler(this,this.configFun) , null, Laya.Loader.JSON );
 		DataSession.staticLog( LogType.LOAD_CONFIG );
+
+		Laya.Browser.window.wx = Laya.Browser.window.qg;
+		//console.log( Laya.Browser.window.wx );
+		//console.log( Laya.Browser.window.qg );
 	}
 
 	public configFun(configJson:any):void{
-		// try {
-		// 	DataSession.staticLog( LogType.LOAD_VERSION , JSON.stringify(configJson)  );
-		// 	MyConfig.IP = configJson.IP;
-		// 	MyConfig.PLATFORM = configJson.PLATFORM;
-		// 	MyConfig.TEST = configJson.TEST;
-		// 	if( MyConfig.PLATFORM == 10 ){
-		// 		Laya.URL.basePath = "https://img.kuwan511.com/rideGame/4.2.0/";
-		// 	}
-		// } catch (error) {
+		try {
+			DataSession.staticLog( LogType.LOAD_VERSION , JSON.stringify(configJson)  );
+			MyConfig.IP = configJson.IP;
+			MyConfig.PLATFORM = configJson.PLATFORM;
+			MyConfig.TEST = configJson.TEST;
+			if( MyConfig.PLATFORM == 10 ){
+				Laya.URL.basePath = "https://img.kuwan511.com/rideGame/4.2.0/";
+			}
+		} catch (error) {
 			DataSession.staticLog( LogType.LOAD_CONFIG_ERR );
 			MyConfig.IP = "https://st.kuwan511.com/";
-			MyConfig.PLATFORM = 0;
+			MyConfig.PLATFORM = 1;
 			MyConfig.TEST = 0;
-		// }
+		}
 		//ZipLoader.load("all.zip",new Laya.Handler(this,this.allZipFun) );
 		this.loadVersion();
 		this.setText( "正在加载version文件" );
@@ -126,6 +130,8 @@ class Main {
 		//console.log( Laya.View.uiMap );
 		//new LoadingScene()
 		
+		MyDeBug.trace("ui");
+		
 		this.setText( "正在加载游戏配置文件" );
 		
 		// if( arr != null ){
@@ -141,54 +147,28 @@ class Main {
 		Laya.Scene.setLoadingPage( lv );
 		Laya.Scene.showLoadingPage();
 		Laya.SoundManager.setMusicVolume( 0.2 );
+		MyDeBug.trace("1");
 		App.getInstance().initEvent(GameEvent);
 		App.getInstance().initEvent(MyEvent);
 		App.getInstance().setGameInit(MyGameInit);
+		MyDeBug.trace("2");
 		Laya.Dialog.manager.setLockView( <any>new LoadView() );
-		// ZipLoader.load("config.zip?ver=" + Math.random(), new Laya.Handler(this, this.zipFun));
-
-		let arrTables = [];
-		for(let i = 0; i < this.tables.length; i++)
-		{
-			arrTables.push("config/" + this.tables[i]);
-		}
-		Laya.loader.load(arrTables,new Laya.Handler(this,this.onTabalesCom))
+		MyDeBug.trace("3");
+		
+		ZipLoader.load("config.zip?ver=" + Math.random(), new Laya.Handler(this, this.zipFun));
 		
 		DataSession.staticLog( LogType.LOAD_CONFIGZIP );
 	}
 
-	private tables:string[] = ["sys_stagemap.txt",
-	"sys_stageinfo.txt",
-	"sys_enemy.txt",
-	"sys_item.txt",
-	"sys_compose.txt",
-	"sys_pet.txt",
-	"sys_skill.txt",
-	"sys_talent.txt",
-	"sys_talentcost.txt",
-	"sys_mission.txt",
-	"sys_talentinfo.txt"];
-
 	public zipFun(arr: Array<string>): void {
+		
 		App.getInstance().configManager.init( arr );
+		
 		SysItem.init();
 		SysStageInfo.init();
+		
 		App.sendEvent(MyEvent.LOGIN);
-		MyEffect.init();
-		this.t.removeSelf();
-	}
-
-	private onTabalesCom():void
-	{
-		// let arr = [];
-		// for(let i = 0; i < this.tables.length; i++)
-		// {
-		// 	arr.push(Laya.loader.getRes(this.tables[i]));
-		// }
-		App.getInstance().configManager.init( this.tables );
-		SysItem.init();
-		SysStageInfo.init();
-		App.sendEvent(MyEvent.LOGIN);
+		
 		MyEffect.init();
 		this.t.removeSelf();
 	}

@@ -15,7 +15,7 @@ export default class LeuokSession extends Session{
     
     private newerSession:NewerSession = null;
     private sdkSession:SdkSession = null;
-    private box:ui.youzi.YouZiBoxUI = null;
+    // private box:ui.youzi.YouZiBoxUI = null;
     private dataSession:DataSession = null;
 
     constructor(){
@@ -31,11 +31,11 @@ export default class LeuokSession extends Session{
         o.moneyType = 2;
         o.oldMoney = oldGold;
         o.newMoney = newGold;
-        this.getRoot().money( o );
+        // this.getRoot().money( o );
     }
 
     public enterFun( url:string ):void{
-        this.getRoot().adLogin( {"nickName":this.sdkSession.wxName} );
+        // this.getRoot().adLogin( {"nickName":this.sdkSession.wxName} );
         this.loadFun();
     }
 
@@ -57,41 +57,41 @@ export default class LeuokSession extends Session{
         Laya.timer.callLater( this,this.nextFun );
     }
 
-    public win;
+    // public win;
 
     public initAll():void{
-        this.box = new ui.youzi.YouZiBoxUI();
-        this.box.height = Laya.stage.height;
-        this.box.mouseThrough = true;
-        Laya.stage.addChild( this.box );
+        // this.box = new ui.youzi.YouZiBoxUI();
+        // this.box.height = Laya.stage.height;
+        // this.box.mouseThrough = true;
+        // Laya.stage.addChild( this.box );
         
-        YouziCenter.getInstance().initYouzi( "wxb45b791f8e76153d" , "", "1.00.00");
-        YouziCenter.getInstance().createMainPush( this.box.zhuTui , {x:0,y:0 } );
-        YouziCenter.getInstance().createSlideButton( this.box.chouTi  , {x:80,y:0,width:80,height:74} , true , true );
-        this.win = YouziCenter.getInstance().createSlideWindowUI( this.box , {x:0,y:250} , true);//150 {x:0,y:628}
-        this.win.btnSLideClose.zOrder = 10000;
-        YouziCenter.getInstance().createBottomBanner( this.box.bottomBox , {x:( Laya.stage.width - 640 ) / 2  ,y:0} );
+        // YouziCenter.getInstance().initYouzi( "wxb45b791f8e76153d" , "", "1.00.00");
+        // YouziCenter.getInstance().createMainPush( this.box.zhuTui , {x:0,y:0 } );
+        // YouziCenter.getInstance().createSlideButton( this.box.chouTi  , {x:80,y:0,width:80,height:74} , true , true );
+        // this.win = YouziCenter.getInstance().createSlideWindowUI( this.box , {x:0,y:250} , true);//150 {x:0,y:628}
+        // this.win.btnSLideClose.zOrder = 10000;
+        // YouziCenter.getInstance().createBottomBanner( this.box.bottomBox , {x:( Laya.stage.width - 640 ) / 2  ,y:0} );
         
         //let xx = (750 - 530) / 2;
         //let yy = ( Laya.stage.height - 680 ) / 2;
         //this.wall = YouziCenter.getInstance().createMoreGameUI(this.box , {x:xx,y:yy} );
-        //App.onEvent( GameEvent.OPEN_DIALOG ,this,this.openDialogFun );
+        App.onEvent( GameEvent.OPEN_DIALOG ,this,this.openDialogFun );
         App.onEvent( GameEvent.ENTER_SCENE ,this,this.enterSceneFun );
-        //App.onEvent( GameEvent.CLOSE_DIALOG ,this,this.closeDialogFun );
+        App.onEvent( GameEvent.CLOSE_DIALOG ,this,this.closeDialogFun );
         //App.onEvent( GameEvent.OPEN_SCENE_START, this,this.openSceneStartFun );
         if( this.newerSession.isNew ){
             this.setNowUrl("",0);
         }
     }
 
-    public showWall:boolean = false;
+    // public showWall:boolean = false;
     public openSceneStartFun( url:string ):void{
         if( url == MyGameInit.MainScene && App.getInstance().nowSceneUrl == MyGameInit.BattleScene ){
-            this.showWall = true;
+            // this.showWall = true;
         }
     }
 
-    public wall:any;
+    // public wall:any;
 
     private closeDialogFun(url:string):void{
         console.log( "关闭窗口:" , url );
@@ -100,24 +100,24 @@ export default class LeuokSession extends Session{
             this.closeBanner.clear();
         }
         Laya.timer.callLater( this,this.nextFun );
-        if( url == MyGameInit.RankDialog ){
-            Laya.timer.callLater( this,this.nextCloseFun );
-        }else if( url == MyGameInit.TimeGoldDialog ){
-            Laya.timer.callLater( this,this.nextCloseFun );
-        }
+        // if( url == MyGameInit.RankDialog ){
+        //     Laya.timer.callLater( this,this.nextCloseFun );
+        // }else if( url == MyGameInit.TimeGoldDialog ){
+        //     Laya.timer.callLater( this,this.nextCloseFun );
+        // }
     }
 
-    public wallTimes:number = 0;
+    // public wallTimes:number = 0;
 
     public nextCloseFun():void{
-        if( this.wallTimes >= 2 ){
-            return;
-        }
-        let ddd = this.wall.getChildByName("maskButton");
-        ddd.scale( 2,2 );
-        this.wall.showMoreGameUI();
-        this.wallTimes++;
-        this.wall.visible = true;
+        // if( this.wallTimes >= 2 ){
+        //     return;
+        // }
+        // let ddd = this.wall.getChildByName("maskButton");
+        // ddd.scale( 2,2 );
+        // this.wall.showMoreGameUI();
+        // this.wallTimes++;
+        // this.wall.visible = true;
     }
 
     private nextFun():void{
@@ -149,12 +149,13 @@ export default class LeuokSession extends Session{
 
     public setNowUrl( url:string , type:number = 0 ):void 
     {
-        Laya.stage.addChild( this.box );
-        this.box.zOrder = 1000;
-        for ( let a:number = 0; a < this.box.numChildren; a++ ){
-            let sp:Laya.Sprite = <any>this.box.getChildAt(a);
-            sp.visible = false;
-        }
+        console.log("要显示banner了");
+        // Laya.stage.addChild( this.box );
+        // this.box.zOrder = 1000;
+        // for ( let a:number = 0; a < this.box.numChildren; a++ ){
+        //     let sp:Laya.Sprite = <any>this.box.getChildAt(a);
+        //     sp.visible = false;
+        // }
         // this.box.bottomBox.bottom = 0;
         // if( this.newerSession.isNew ){
         //     return;
@@ -170,53 +171,54 @@ export default class LeuokSession extends Session{
             //this.showBanner( url , "adunit-cab23e26170cff18" );
         }else if( url == MyGameInit.TimeGoldDialog ){
             //this.setShow( [LeuokSession.BOTTOMBOX] );
-            this.showBanner( url , "adunit-7a2063d328547c2e" );
+            this.showBanner( url , "146702" );
         }else if( url == MyGameInit.TreasureDialog ){
             //this.setShow( [LeuokSession.BOTTOMBOX] );
-            this.showBanner( url , "adunit-3cd8214ae603f211" );
+            this.showBanner( url , "146703" );
         }else if( url == MyGameInit.RankDialog ){
-            this.showBanner( url , "adunit-04b091330f81a643" );
+            this.showBanner( url , "146704" );
         }else if( url == MyGameInit.GetGoldDialog ){
-            this.showBanner( url , "adunit-bf6316b9d48e40fe" );
+            this.showBanner( url , "146705" );
             //this.setShow([LeuokSession.BOTTOMBOX]);
             //this.box.bottomBox.bottom = 300;
         }else if( url == MyGameInit.SettingDialog ){
-            this.showBanner( url , "adunit-a7f05f24fa0c3f97" );
+            this.showBanner( url , "146706" );
             //this.setShow([LeuokSession.BOTTOMBOX]);
             //this.box.bottomBox.bottom = 300;
         }else if( url == MyGameInit.SelectStage || url == MyGameInit.SelectStage2 ){
-            this.setShow([LeuokSession.ZHUTUI , LeuokSession.BOTTOMBOX]);
-            this.box.bottomBox.bottom = 0;
-            this.showBanner( url , "adunit-75ac31709ab86ae8" );
+            // this.setShow([LeuokSession.ZHUTUI , LeuokSession.BOTTOMBOX]);
+            // this.box.bottomBox.bottom = 0;
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.BattleScene ){
             //this.setShow([LeuokSession.BOTTOMBOX]);//,LeuokSession.ZHUTUI
         }else if( url == MyGameInit.GameOverDialog ){
             //this.setShow([LeuokSession.BOTTOMBOX]);
-            this.setShow( [LeuokSession.ZHUTUI , LeuokSession.BOTTOMBOX ] );
-            this.box.bottomBox.bottom = null;
-            this.box.bottomBox.y = 450;
-            this.showBanner( url , "adunit-75ac31709ab86ae8" );
+            // this.setShow( [LeuokSession.ZHUTUI , LeuokSession.BOTTOMBOX ] );
+            // this.box.bottomBox.bottom = null;
+            // this.box.bottomBox.y = 450;
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.TASK ){
-            this.showBanner( url , "adunit-00ab202e45ebc70e" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.ZHUAN ){
-            this.showBanner( url , "adunit-3b85f33cbf452811" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.FlyBoxDialog ){
             //this.setShow([]);
-            this.showBanner( url , "adunit-66271589f4d78a21" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.SHARE_MERGE_DIALOG ){
-            this.showBanner( url , "adunit-fd9db47faafd1a59" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.AD_MERGE_DIALOG ){
-            this.showBanner( url , "adunit-5ff2b8db28a455e7" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.TIANFU ){
-            this.showBanner( url , "adunit-9d7c2a81711db63f" );
+            this.showBanner( url , "146706" );
         }else if( url == MyGameInit.TASK_REWARD ){
-            this.showBanner( url , "adunit-d517a866f9ab34bc" );
+            this.showBanner( url , "146706" );
         }
     }
 
     public closeBanner:MyArray = new MyArray();
 
     public showBanner( url:string, code:string ):void{
+        console.log("调用banner接口");
         this.sdkSession.showBanner( code );
         this.closeBanner.push( url );
     }
@@ -225,33 +227,33 @@ export default class LeuokSession extends Session{
     public static CHOUTI:string = "chouTi";
     public static BOTTOMBOX:string = "bottomBox";
 
-    public clickFun():void{
-        return;
-        this.win.visible = true;
-        this.win.showSlideWindow();
-        this.box.mouseThrough = false;
+    // public clickFun():void{
+    //     return;
+    //     this.win.visible = true;
+    //     this.win.showSlideWindow();
+    //     // this.box.mouseThrough = false;
 
-        Laya.timer.callLater( this,this.nFun );
+    //     Laya.timer.callLater( this,this.nFun );
         
-    }
+    // }
 
-    public nFun():void{
-        Laya.stage.once(Laya.Event.CLICK,this,this.sClickFun);
-    }
+    // public nFun():void{
+    //     Laya.stage.once(Laya.Event.CLICK,this,this.sClickFun);
+    // }
 
-    public sClickFun():void{
-        this.win.closeSlideWindow();
-    }
+    // public sClickFun():void{
+    //     this.win.closeSlideWindow();
+    // }
 
     public setShow( arr:Array<string> ):void{
-        for( let a of arr ){
-            let c:Laya.Sprite = <any>this.box.getChildByName(a);
-            c.visible = true;
-            c.on( Laya.Event.CLICK,this,this.clickFun );
-        }
+        // for( let a of arr ){
+        //     let c:Laya.Sprite = <any>this.box.getChildByName(a);
+        //     c.visible = true;
+        //     c.on( Laya.Event.CLICK,this,this.clickFun );
+        // }
 
-        this.win.visible = false;
-        this.win.closeSlideWindow();
+        // this.win.visible = false;
+        // this.win.closeSlideWindow();
 
         // for ( let a:number = 0; a < this.box.numChildren; a++ ){
         //     let sp:Laya.Sprite = <any>this.box.getChildAt(a);
@@ -269,13 +271,13 @@ export default class LeuokSession extends Session{
         //this.box.mouseThrough = false;
     }
 
-    public getRoot():any{
-        return Laya.Browser.window.wx.leuok;
-    }
+    // public getRoot():any{
+    //     return Laya.Browser.window.wx.leuok;
+    // }
 
-    public onSHARE_START( type:number ):void{
-        this.getRoot().sharedOut( {"type":type} );
-    }
+    // public onSHARE_START( type:number ):void{
+    //     this.getRoot().sharedOut( {"type":type} );
+    // }
 
     /**
      * 
@@ -286,7 +288,7 @@ export default class LeuokSession extends Session{
         let obj:any = {};
         obj.type = type;
         obj.subType = subType;
-        this.getRoot().adVideo( obj );
+        // this.getRoot().adVideo( obj );
         //this.dataSession.log( type * 100000 + subType );
     }
 }

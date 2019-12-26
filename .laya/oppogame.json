@@ -3,21 +3,21 @@
         "../bin/**/*.*"
     ],
     "openDataZone": false,
-    "compressJson": true,
+    "compressJson": false,
     "compressJsonFilter": [
         "$basePath/**/*.{json,atlas}"
     ],
     "compressJsonNoteList": [
         ""
     ],
-    "compressImage": true,
+    "compressImage": false,
     "compressImageFilter": [
         "$basePath/**/*.{png,jpg}"
     ],
     "compressImageNoteList": [
         ""
     ],
-    "compressJs": true,
+    "compressJs": false,
     "compressJsFilter": [
         "$basePath/**/*.js"
     ],
@@ -39,7 +39,7 @@
     ],
     "exclude": false,
     "excludeFilter": [
-        "!$basePath/res/**/*.*"
+        "!$basePath/**/*.{png,jpg}"
     ],
     "vexcludeNoteList": [
         ""
@@ -56,16 +56,16 @@
         ""
     ],
     "clearReleaseDir": true,
-    "compile": true,
+    "compile": false,
     "forceCompile": false,
     "onlyIndexJS": true,
     "projectType": "ts",
-    "pubTime": 1575605912964,
+    "pubTime": 1577350393192,
     "oppoInfo": {
-        "name": "骑马合成",
+        "name": "勇闯恶魔大陆",
         "projName": "quickgame",
-        "package": "com.ntx.qima",
-        "icon": "D:\\BrainOut\\icon.png",
+        "package": "com.handarui.ycemdl.nearme.gamecenter",
+        "icon": "D:\\Knight2.2\\logo.jpg",
         "versionName": "1.0",
         "versionCode": 1,
         "minPlatformVersion": 1050,

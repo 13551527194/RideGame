@@ -689,17 +689,17 @@ export module ui.scene {
         }
     }
     REG("ui.scene.NewerSceneUI",NewerSceneUI);
-    export class newhandUI extends Laya.View {
+    export class newhand1UI extends Laya.View {
 		public ani1:Laya.FrameAnimation;
 		public lightClip:Laya.Clip;
         public static  uiView:any ={"type":"View","props":{"width":100,"height":100},"compId":2,"child":[{"type":"Clip","props":{"y":-137,"x":-155,"var":"lightClip","skin":"newhand/clip_guang.png","scaleY":2,"scaleX":2,"clipY":2,"clipX":4,"blendMode":"lighter"},"compId":9},{"type":"Image","props":{"y":43,"x":12,"skin":"girl/xiaoshou.png","anchorY":0.5,"anchorX":0.5},"compId":3}],"animations":[{"nodes":[{"target":3,"keyframes":{"scaleY":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":3,"key":"scaleY","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":3,"key":"scaleY","index":2},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":3,"label":null,"key":"scaleY","index":6},{"value":1,"tweenMethod":"linearNone","tween":true,"target":3,"label":null,"key":"scaleY","index":8}],"scaleX":[{"value":1,"tweenMethod":"linearNone","tween":true,"target":3,"key":"scaleX","index":0},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":3,"key":"scaleX","index":2},{"value":0.8,"tweenMethod":"linearNone","tween":true,"target":3,"label":null,"key":"scaleX","index":6},{"value":1,"tweenMethod":"linearNone","tween":true,"target":3,"label":null,"key":"scaleX","index":8}],"rotation":[{"value":0,"tweenMethod":"linearNone","tween":true,"target":3,"key":"rotation","index":0},{"value":0,"tweenMethod":"linearNone","tween":true,"target":3,"label":null,"key":"rotation","index":8}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}],"loadList":["newhand/clip_guang.png","girl/xiaoshou.png"],"loadList3D":[]};
         constructor(){ super()}
         createChildren():void {
             super.createChildren();
-            this.createView(newhandUI.uiView);
+            this.createView(newhand1UI.uiView);
         }
     }
-    REG("ui.scene.newhandUI",newhandUI);
+    REG("ui.scene.newhand1UI",newhand1UI);
     export class playerUI extends Laya.View {
 		public run:Laya.FrameAnimation;
 		public ying:Laya.Image;

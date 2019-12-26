@@ -9,13 +9,16 @@ export default class ConfigManager {
 
     private configMap: any = {};
     
-    public init(arr:string[]): void {
-        console.log("所有的配置表",arr.length);
-        for (var i: number = 0, len: number = arr.length; i < len; i ++) {
+    public init(arr: Array<string>): void {
+        for (var i: number = 0, len: number = arr.length; i < len; i += 2) {
             var fileName: string = arr[i];
-            var fileContent: any = Laya.loader.getRes("config/" + fileName);
+            var fileContent: string = arr[i + 1];
             var configData: ConfigData = this.configMap[fileName];
             if (configData == null) {
+                continue;
+            }
+            if (configData.analysisFun) {
+                configData.analysisFun(fileContent);
                 continue;
             }
             configData.dataArray = this.analysisConfig(fileContent, configData.configClass);
@@ -64,7 +67,7 @@ export default class ConfigManager {
      * 不然就转成int了
      * 0.0会被认为是0 int
      */
-    public analysisConfig(configString: any, configClass: any): Array<any> {
+    public analysisConfig(configString: string, configClass: any): Array<any> {
         if (configString.charCodeAt(0) == 65279) {
             configString = configString.substring(1);
         }
