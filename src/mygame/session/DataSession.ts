@@ -32,7 +32,7 @@ export default class DataSession extends Session{
     public static QQ:number = 2;
     public static DOUYIN:number = 3;
     
-    public static GAME_VER:string = "5.0.0";
+    public static GAME_VER:string = "1.1.1";
     public static START_TIME:number = 0;
     
     public static ONLY_ID:number = Math.random();
@@ -143,7 +143,6 @@ export default class DataSession extends Session{
     public requestDataFun( str:string ):void{
 
         console.log("得到数据" + str );
-
         this.dataIsInit = true;
         if( str == "{}" || str == "" ){
             //新玩家
@@ -177,7 +176,7 @@ export default class DataSession extends Session{
      * 记录到地图
      */
     public save1():void{
-        App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=1&type=0&num=0","post");
+        // App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=1&type=0&num=0","post");
     }
     
     public requestSaveDataFun( str:string ):void{
@@ -203,7 +202,7 @@ export default class DataSession extends Session{
 
     public clearData():void {
         this.dataIsInit = false;
-        App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=0&type=0&num=0","post",this,this.clearFun);
+        // App.http( MyConfig.IP + "gamex2/save2" ,"skey=" + this.saveKey + "&gamedata=0&type=0&num=0","post",this,this.clearFun);
     }
 
     public clearFun():void{
@@ -399,22 +398,22 @@ export default class DataSession extends Session{
     }
 
     public saveRank():void {
-        if( this.newerSession.isNew ){
-            return;
-        }
-        if( Laya.Browser.onMiniGame == false ){
-            let score:number = this.getScore();
-            let item:string = this.getItem();
-            App.http( MyConfig.IP + "gamex2/saveRank" , "skey=" + this.saveKey + "&name=骑马合成冲" + "&url=sence/action.png" + "&scorestr=" + score + "&items=" + item , "post" );
-            return;
-        }
-        if( this.sdkSession.haveRight == false ){
-            return;
-        }
-        let score:number = this.getScore();
-        let item:string = this.getItem();
-        console.log( "排行榜数据" , score ,item );
-        App.http( MyConfig.IP + "gamex2/saveRank" , "skey=" + this.saveKey + "&name=" + this.sdkSession.wxName + "&url=" + this.sdkSession.wxHead + "&scorestr=" + score + "&items=" + item , "post" );
+        // if( this.newerSession.isNew ){
+        //     return;
+        // }
+        // if( Laya.Browser.onMiniGame == false ){
+        //     let score:number = this.getScore();
+        //     let item:string = this.getItem();
+        //     App.http( MyConfig.IP + "gamex2/saveRank" , "skey=" + this.saveKey + "&name=骑马合成冲" + "&url=sence/action.png" + "&scorestr=" + score + "&items=" + item , "post" );
+        //     return;
+        // }
+        // if( this.sdkSession.haveRight == false ){
+        //     return;
+        // }
+        // let score:number = this.getScore();
+        // let item:string = this.getItem();
+        // console.log( "排行榜数据" , score ,item );
+        // App.http( MyConfig.IP + "gamex2/saveRank" , "skey=" + this.saveKey + "&name=" + this.sdkSession.wxName + "&url=" + this.sdkSession.wxHead + "&scorestr=" + score + "&items=" + item , "post" );
     }
 
     public getItem():string {
@@ -428,7 +427,7 @@ export default class DataSession extends Session{
     }
 
     public getRank( caller:any  , listener:Function  ):void{
-        App.http( MyConfig.IP + "gamex2/getRank" , "skey=" + this.saveKey + "&st=0&et=50", "GET",caller , listener );
+        // App.http( MyConfig.IP + "gamex2/getRank" , "skey=" + this.saveKey + "&st=0&et=50", "GET",caller , listener );
     }
 
     public getScore():number {

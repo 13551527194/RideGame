@@ -76,7 +76,7 @@ export default class LeuokSession extends Session{
         //let yy = ( Laya.stage.height - 680 ) / 2;
         //this.wall = YouziCenter.getInstance().createMoreGameUI(this.box , {x:xx,y:yy} );
         App.onEvent( GameEvent.OPEN_DIALOG ,this,this.openDialogFun );
-        App.onEvent( GameEvent.ENTER_SCENE ,this,this.enterSceneFun );
+        // App.onEvent( GameEvent.ENTER_SCENE ,this,this.enterSceneFun );
         App.onEvent( GameEvent.CLOSE_DIALOG ,this,this.closeDialogFun );
         //App.onEvent( GameEvent.OPEN_SCENE_START, this,this.openSceneStartFun );
         if( this.newerSession.isNew ){
@@ -149,7 +149,7 @@ export default class LeuokSession extends Session{
 
     public setNowUrl( url:string , type:number = 0 ):void 
     {
-        console.log("要显示banner了");
+        console.log("打开界面",url);
         // Laya.stage.addChild( this.box );
         // this.box.zOrder = 1000;
         // for ( let a:number = 0; a < this.box.numChildren; a++ ){
@@ -161,7 +161,7 @@ export default class LeuokSession extends Session{
         //     return;
         // }
         if( url == MyGameInit.MainScene ){
-            this.setShow( [LeuokSession.ZHUTUI,LeuokSession.CHOUTI] );
+            // this.setShow( [LeuokSession.ZHUTUI,LeuokSession.CHOUTI] );
             // if( this.showWall ){
             //     this.showWall = false;
             //     Laya.timer.once( 100, this,this.nextCloseFun );
@@ -190,6 +190,7 @@ export default class LeuokSession extends Session{
             // this.box.bottomBox.bottom = 0;
             this.showBanner( url , "146706" );
         }else if( url == MyGameInit.BattleScene ){
+            // this.sdkSession.hideBanner();
             //this.setShow([LeuokSession.BOTTOMBOX]);//,LeuokSession.ZHUTUI
         }else if( url == MyGameInit.GameOverDialog ){
             //this.setShow([LeuokSession.BOTTOMBOX]);

@@ -5,41 +5,69 @@ import { DISPLAY_TYPE } from "./BattleDisplay";
 import MyEffect from "../effect/MyEffect";
 import App from "../../game/App";
 import MyGameInit from "../MyGameInit";
+import MainGameBox from "../../oppoGame/MainGameBox";
+import RightGameBox from "../../oppoGame/RightGameBox";
+import MyConfig from "../../MyConfig";
 
 export default class BattleScene extends ui.scene.BattleSceneUI {
+    private mainGameBox: MainGameBox;
+    private rightGameBox: RightGameBox;
     constructor() {
         super();
         this.bloodRect.width = this.bloodImg.width;
         this.bloodRect.height = this.bloodImg.height;
-        
+
         this.whiteRect.width = this.bloodWhite.width;
         this.whiteRect.height = this.bloodWhite.height;
 
-        
+
         this.initPool();
+
+        this.redBtn.visible = MyConfig.oppoSwitch == 1;
+        if (MyConfig.oppoSwitch == 1)  {
+            if (!this.mainGameBox)  {
+                this.mainGameBox = new MainGameBox();
+            }
+            this.mainGameBox.x = -750;
+            this.addChild(this.mainGameBox);
+            this.redPoint.visible = true;
+            this.redPoint.ani1.play(0, true);
+
+            if (!this.rightGameBox)  {
+                this.rightGameBox = new RightGameBox();
+            }
+            this.rightOppoBox.addChild(this.rightGameBox);
+
+            this.redBtn.on(Laya.Event.CLICK, this, this.onShowGames);
+        }
     }
 
-    private initPool():void {
-        for( let i:number = 0; i < 3; i++ ){
-            Laya.Pool.recover( "hitEf" , this.createHitEf() );
+    private onShowGames(): void  {
+        Laya.Tween.to(this.mainGameBox, { x: 0 }, 300);
+        this.redPoint.visible = false;
+    }
+
+    private initPool(): void {
+        for (let i: number = 0; i < 3; i++) {
+            Laya.Pool.recover("hitEf", this.createHitEf());
         }
-        for( let i:number = 0; i < 30; i++ ){
+        for (let i: number = 0; i < 30; i++) {
             let img = new Laya.Image("sence/dongjin.png");
-            Laya.Pool.recover( "flygold" , img );
+            Laya.Pool.recover("flygold", img);
         }
-        for( let i:number = 0; i < 13; i++ ){
+        for (let i: number = 0; i < 13; i++) {
             let isCrit = (i > 10);
             let f = new Laya.FontClip();
-            if( isCrit ){
+            if (isCrit) {
                 f.skin = "battlescene/hurt1.png";
                 f.sheet = "0123 4567 89+- x1%=";
-            }else{
+            } else {
                 f.skin = "battlescene/hurt2.png";
                 f.sheet = "0123 4567 89+- x1=%";
             }
             f.anchorX = 0.5;
             f.anchorY = 0.5;
-            Laya.Pool.recover( "flyFc" + isCrit , f );
+            Laya.Pool.recover("flyFc" + isCrit, f);
         }
     }
 
@@ -64,23 +92,23 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
         this.setEquipmentByPart(this.e3, arr[EQUIP_TYPE.HORSE]);
     }
 
-    public setEquipmentByPart( img:Laya.Image , equip:Equip ):void{
-        let image:Laya.Image = <Laya.Image>img.getChildAt(0);
-        if( equip == null ){
+    public setEquipmentByPart(img: Laya.Image, equip: Equip): void {
+        let image: Laya.Image = <Laya.Image>img.getChildAt(0);
+        if (equip == null) {
             image.skin = null;
             return;
         }
         let sys = equip.getSysItem();
-        img.skin = Res.getItemBorder( sys.itemQuality );
-        image.skin = Res.getItemUrl( sys.id );
+        img.skin = Res.getItemBorder(sys.itemQuality);
+        image.skin = Res.getItemUrl(sys.id);
     }
 
-    public bloodRect:Laya.Rectangle = new Laya.Rectangle(0,0);
-    public whiteRect:Laya.Rectangle = new Laya.Rectangle(0,0);
+    public bloodRect: Laya.Rectangle = new Laya.Rectangle(0, 0);
+    public whiteRect: Laya.Rectangle = new Laya.Rectangle(0, 0);
     public twover: boolean = true;
-    
-    public setNowHp( value:number ):void{
-        if( value <= 0 ){
+
+    public setNowHp(value: number): void {
+        if (value <= 0) {
             this.bloodImg.visible = false;
             this.bloodWhite.visible = false;
             return;
@@ -101,7 +129,7 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
         let nowWid = this.bloodWhite.scrollRect.width - len;
         this.whiteRect.width = nowWid;
         this.bloodWhite.scrollRect = this.whiteRect;
-        if ( this.whiteRect.width <= this.bloodRect.width) {
+        if (this.whiteRect.width <= this.bloodRect.width) {
             Laya.timer.clear(this, this.whiteLoopFun);
             this.twover = true;
         }
@@ -111,7 +139,7 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
      * 只更新血
      * @param value 
      */
-    public onlyResetHp( value:number ):void{
+    public onlyResetHp(value: number): void {
         this.bloodRect.width = this.bloodImg.width * value;
         this.whiteRect.width = this.bloodWhite.width * value;
         this.bloodImg.scrollRect = this.bloodRect;
@@ -120,66 +148,65 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
         this.bloodWhite.visible = true;
     }
 
-    public hpMax():void {
+    public hpMax(): void {
         let t = new Laya.Tween();
-        t.to( this.bloodRect , { width:this.bloodImg.width , update:new Laya.Handler(this,this.hpmaxFun) },  200 ,Laya.Ease.strongOut );
+        t.to(this.bloodRect, { width: this.bloodImg.width, update: new Laya.Handler(this, this.hpmaxFun) }, 200, Laya.Ease.strongOut);
 
         let tt = new Laya.Tween();
-        tt.to( this.blood , { scaleX:1,scaleY:1.2}, 100, null ,new Laya.Handler( this,this.bloodComfun)  );
+        tt.to(this.blood, { scaleX: 1, scaleY: 1.2 }, 100, null, new Laya.Handler(this, this.bloodComfun));
     }
 
-    private hpmaxFun():void{
+    private hpmaxFun(): void {
         this.bloodImg.scrollRect = this.bloodRect;
     }
 
-    private bloodComfun():void {
-        this.blood.scale(1,1);
+    private bloodComfun(): void {
+        this.blood.scale(1, 1);
     }
 
-    public createHitEf():Laya.Animation{
+    public createHitEf(): Laya.Animation {
         let c = new Laya.Animation();
-        c.interval = 1000/60;
+        c.interval = 1000 / 60;
         c.source = "scene/texiao/gongji.ani";
         c.zOrder = 1001;
-        c.scale(2,2);
+        c.scale(2, 2);
         return c;
     }
 
     /**
      * 冒红色的光
      */
-    public playHitEffect( isCrit:boolean ,ex:number,ey:number ): void {
+    public playHitEffect(isCrit: boolean, ex: number, ey: number): void {
         let c = Laya.Pool.getItem("hitEf");
-        if( c == null ){
+        if (c == null) {
             c = this.createHitEf();
         }
         c.once(Laya.Event.COMPLETE, this, this.playHitEffectOver, [c]);
-        c.pos( ex,ey );
-        c.play( 0,false );
+        c.pos(ex, ey);
+        c.play(0, false);
         this.battleSp.addChild(c);
-        if( isCrit ) {
+        if (isCrit) {
             //Laya.SoundManager.playSound("sound/comboEffect1.wav");
             App.getInstance().gameSoundManager.playEffect("sound/comboEffect1.wav");
-        }else{
+        } else {
             App.getInstance().gameSoundManager.playEffect("sound/fx_Hit.wav");
             //Laya.SoundManager.playSound("sound/fx_Hit.wav");
         }
     }
 
-    private playHitEffectOver(c:Laya.Animation): void {
+    private playHitEffectOver(c: Laya.Animation): void {
         c.removeSelf();
-        Laya.Pool.recover( "hitEf" , c );
+        Laya.Pool.recover("hitEf", c);
     }
 
-    public flyHitEffect(num: number, isCrit: boolean, x1:number,y1:number): void
-    {
-        let f = Laya.Pool.getItem("flyFc" + isCrit );
-        if( f == null ){
+    public flyHitEffect(num: number, isCrit: boolean, x1: number, y1: number): void  {
+        let f = Laya.Pool.getItem("flyFc" + isCrit);
+        if (f == null) {
             f = new Laya.FontClip();
-            if( isCrit ){
+            if (isCrit) {
                 f.skin = "battlescene/hurt1.png";
                 f.sheet = "0123 4567 89+- x1%=";
-            }else{
+            } else {
                 f.skin = "battlescene/hurt2.png";
                 f.sheet = "0123 4567 89+- x1=%";
             }
@@ -196,27 +223,27 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
         f.x = x1;
         f.y = y1;
         let t = new Laya.Tween();
-        if( isCrit ){
+        if (isCrit) {
             let tt = new Laya.Tween();
-            f.scale(0,0);
-            tt.to( f,{ scaleX:1,scaleY:1 } , 200 , Laya.Ease.backOut );
+            f.scale(0, 0);
+            tt.to(f, { scaleX: 1, scaleY: 1 }, 200, Laya.Ease.backOut);
         }
-        t.to(f, { y: f.y - 200, alpha:0 } , 2000, null, new Laya.Handler(this, this.effectFun, [f,isCrit]));
+        t.to(f, { y: f.y - 200, alpha: 0 }, 2000, null, new Laya.Handler(this, this.effectFun, [f, isCrit]));
     }
 
-    public effectFun(f: Laya.Sprite ,isCrit: boolean ): void {
+    public effectFun(f: Laya.Sprite, isCrit: boolean): void {
         f.removeSelf();
-        Laya.Pool.recover( "flyFc" + isCrit , f );
+        Laya.Pool.recover("flyFc" + isCrit, f);
     }
 
-    public nowGold:number = 0;
+    public nowGold: number = 0;
 
-    public flyGold( x1:number,y1:number,gold:number ):void{
+    public flyGold(x1: number, y1: number, gold: number): void {
         let flyGoldNum: number = 5;
         let goldEvery: number = gold / flyGoldNum;
         for (let i: number = 0; i < flyGoldNum; i++) {
-            let img = Laya.Pool.getItem("flygold"); 
-            if( img == null ){
+            let img = Laya.Pool.getItem("flygold");
+            if (img == null) {
                 img = new Laya.Image("sence/dongjin.png");
             }
             Laya.stage.addChild(img);
@@ -225,74 +252,74 @@ export default class BattleScene extends ui.scene.BattleSceneUI {
             img.x = x1 + Math.random() * 80 - 50;
             img.y = y1 + Math.random() * 80 - 150;
             img.alpha = 0;
-            this.flyEffect(img , goldEvery);
+            this.flyEffect(img, goldEvery);
         }
     }
 
     private flyEffect(img: Laya.Image, gold: number): void {
-        let p = this.goldImg.localToGlobal( MyEffect.getP00() );
+        let p = this.goldImg.localToGlobal(MyEffect.getP00());
         let t = new Laya.Tween();
         img.anchorX = img.anchorY = 0.5;
         MyEffect.BigSmallEffect(img);
         t.to(img, { x: p.x + 10, y: p.y + 10, scaleX: 0.6, scaleY: 0.6 }, 700, Laya.Ease.backIn, new Laya.Handler(this, this.flyGoldOverFun, [img, gold]), Math.random() * 500);
     }
-    
+
     public flyGoldOverFun(img: Laya.Image, gold: number): void {
         img.removeSelf();
-        Laya.Pool.recover( "flygold",img );
-        
+        Laya.Pool.recover("flygold", img);
+
         let t = new Laya.Tween();
-        t.to(this.goldImg , { scaleX: 0.7, scaleY: 0.7 }, 80);
+        t.to(this.goldImg, { scaleX: 0.7, scaleY: 0.7 }, 80);
 
         let t1 = new Laya.Tween();
-        t1.to(this.goldImg , { scaleX: 1, scaleY: 1 }, 60, null, null, 80);
+        t1.to(this.goldImg, { scaleX: 1, scaleY: 1 }, 60, null, null, 80);
 
         this.nowGold += gold;
 
-        this.goldFc.value = parseInt( Math.ceil( this.nowGold ) + "" ) + "";
+        this.goldFc.value = parseInt(Math.ceil(this.nowGold) + "") + "";
     }
 
-    public setNowGold( value:number ):void{
+    public setNowGold(value: number): void {
         this.goldFc.value = value + "";
         this.nowGold = value;
     }
 
-    public flyNum:number = 0;
-    public FLY_BOX_TIME:number = 10 * 1000;
-    public FLY_BOX_TIME_SECOND:number = 2 * 60 * 1000;
+    public flyNum: number = 0;
+    public FLY_BOX_TIME: number = 10 * 1000;
+    public FLY_BOX_TIME_SECOND: number = 2 * 60 * 1000;
 
-    public flyBoxStart():void{
-        let time:number = 0;
-        if( this.flyNum == 0 ){
+    public flyBoxStart(): void {
+        let time: number = 0;
+        if (this.flyNum == 0) {
             time = this.FLY_BOX_TIME;
-        }else{
+        } else {
             time = this.FLY_BOX_TIME_SECOND;
         }
-        Laya.timer.once( time , this, this.flyBoxFun );
+        Laya.timer.once(time, this, this.flyBoxFun);
         this.flyNum++;
     }
 
-    public flyBoxFun():void{
+    public flyBoxFun(): void {
         let a = new ui.scene.feibaoxiangUI();
         a.mouseThrough = true;
-        this.addChild( a );
+        this.addChild(a);
         a.x = -750;
-        a.ani1.play( 0,true );
+        a.ani1.play(0, true);
         let t = new Laya.Tween();
-        a.box.on(Laya.Event.CLICK,this,this.flyBoxClickFun);
-        t.to( a,{ x:0 },1000,null,new Laya.Handler(this,this.fly2Fun,[a]) );
-    }
-    
-    public flyBoxClickFun():void{
-        App.dialog( MyGameInit.FlyBoxDialog );
-    }
-    
-    public fly2Fun( a:ui.scene.feibaoxiangUI ):void{
-        let t = new Laya.Tween();
-        t.to( a,{ x:750 },500,null,new Laya.Handler(this,this.flyOverFun,[a]) ,3000);
+        a.box.on(Laya.Event.CLICK, this, this.flyBoxClickFun);
+        t.to(a, { x: 0 }, 1000, null, new Laya.Handler(this, this.fly2Fun, [a]));
     }
 
-    public flyOverFun(a:ui.scene.feibaoxiangUI):void{
+    public flyBoxClickFun(): void {
+        App.dialog(MyGameInit.FlyBoxDialog);
+    }
+
+    public fly2Fun(a: ui.scene.feibaoxiangUI): void {
+        let t = new Laya.Tween();
+        t.to(a, { x: 750 }, 500, null, new Laya.Handler(this, this.flyOverFun, [a]), 3000);
+    }
+
+    public flyOverFun(a: ui.scene.feibaoxiangUI): void {
         a.removeSelf();
         this.flyBoxStart();
     }

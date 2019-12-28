@@ -1,1 +1,0 @@
-{"type":"View","props":{"y":170,"x":178,"width":357,"height":341,"anchorY":0.5,"anchorX":0.5},"compId":2,"child":[{"type":"Clip","props":{"y":0,"x":0,"var":"clip","skin":"sence/hechengzha.png","scaleY":2,"scaleX":2,"interval":50,"clipY":2,"clipX":4},"compId":4}],"loadList":["sence/hechengzha.png"],"loadList3D":[]}

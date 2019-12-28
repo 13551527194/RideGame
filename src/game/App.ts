@@ -118,6 +118,7 @@ export default class App {
      * @param param 
      */
     public openDialog(url: string, closeOther: boolean = true, param: any = null): void {
+        console.log("openDialog",url);
         this.openScene( url,closeOther,param ,true);
         //Laya.Scene.load(url, new Laya.Handler(this, this.loadSceneFun, [url, closeOther, param]));
     }
@@ -133,6 +134,7 @@ export default class App {
      * @param param 
      */
     private loadSceneFun(url: string, closeOther: boolean = true, param: any = null): void {
+        console.log("loadSceneFun",url);
         Laya.timer.clear( this,this.delayLockFun );
         Laya.Scene.hideLoadingPage( 100 );
         let data:SceneData = this.sceneMap[url];
@@ -175,6 +177,7 @@ export default class App {
         }
         else
         {
+            console.log("this.sceneRoot.addChild",url);
             this.sceneRoot.addChild( disInstance );
             disInstance.x = (Laya.stage.width - disInstance.width)/2;
             disInstance.y = (Laya.stage.height - disInstance.height)/2;

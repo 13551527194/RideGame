@@ -9,6 +9,8 @@ import PetSession from "../session/PetSession";
 import { ui } from "../../ui/layaMaxUI";
 import MyEffect from "../effect/MyEffect";
 import RotationEffect from "../scene/RotationEffect";
+import CenterGameBox from "../../oppoGame/CenterGameBox";
+import MyConfig from "../../MyConfig";
 
 export default class GameOverDialogMediator extends Mediator{
     public bagSession:BagSession = null;
@@ -20,6 +22,7 @@ export default class GameOverDialogMediator extends Mediator{
         super();
     }
 
+    private centerBox:CenterGameBox;
     public init():void{
         this.sdkSession.initAdBtn( this.dialog.btn2 ,  SdkSession.GAME_OVER );
         this.dialog.ani1.interval = 50;
@@ -35,12 +38,26 @@ export default class GameOverDialogMediator extends Mediator{
         this.dialog.btn2.disabled = false;
         this.dialog.btn1.disabled = false;
         this.dialog.btn3.disabled = false;
+
+        if(MyConfig.oppoSwitch == 1)
+        {
+            if(!this.centerBox)
+        {
+            this.centerBox = new CenterGameBox();
+        }
+        this.centerBox.pos(153,424);
+        }
     }
 
     public comFun():void{
         this.dialog.light.visible = true;
         MyEffect.alhpa( this.dialog.light,1,1000 );
         RotationEffect.play( this.dialog.light );
+
+        if(MyConfig.oppoSwitch == 1)
+        {
+            this.dialog.addChild(this.centerBox);
+        }
     }
 
     public dialog:ui.scene.shengliUI;
@@ -73,14 +90,14 @@ export default class GameOverDialogMediator extends Mediator{
     }
 
     public next():void{
-        // let id = this.battleSession.sys.nextId;
-        // if( id > 5 && id % 2 == 1 ){
-        //     Laya.MouseManager.enabled = false;
-            this.sdkSession.chaPingAd( SdkSession.NEXT_STAGE_CHAPING , new Laya.Handler( this, this.nextHandlerFun ) );            
-        //     this.nextHandlerFun();
-        // }else{
-        //     this.nextHandlerFun();
-        // }
+        let id = this.battleSession.sys.nextId;
+        if( id > 5 && id % 2 == 1 ){
+            Laya.MouseManager.enabled = false;
+            // this.sdkSession.chaPingAd( SdkSession.NEXT_STAGE_CHAPING , new Laya.Handler( this, this.nextHandlerFun ) );            
+            this.nextHandlerFun();
+        }else{
+            this.nextHandlerFun();
+        }
     }
 
     public nextHandlerFun():void{

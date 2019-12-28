@@ -1,7 +1,8 @@
 {
     "x":0,
     "type":"View",
-    "selectedBox":2,
+    "selectedBox":3,
+    "selecteID":4,
     "searchKey":"View,YouziBottomView",
     "props":{"width":640,"visible":false,"sceneColor":"#ffffff","name":"YouziBottomView","height":170},
     "nodeParent":-1,
@@ -17,7 +18,7 @@
             "x":15,
             "type":"Sprite",
             "searchKey":"Sprite,BannerBottomUI",
-            "props":{"y":0,"x":0,"width":640,"visible":false,"var":"BannerBottomUI","sizeGrid":"12,10,0,10","height":170},
+            "props":{"y":-85,"x":10,"width":640,"visible":false,"var":"BannerBottomUI","sizeGrid":"12,10,0,10","height":170},
             "nodeParent":2,
             "label":"BannerBottomUI",
             "isOpen":true,
@@ -117,13 +118,14 @@
                     "props":{"y":0,"x":0,"width":640,"var":"gameBannerList","spaceY":5,"spaceX":5,"repeatY":1,"repeatX":6,"height":170,"hScrollBarSkin":"comp/vscroll.png"},
                     "nodeParent":3,
                     "label":"gameBannerList",
-                    "isOpen":false,
+                    "isOpen":true,
                     "isDirectory":true,
                     "isAniNode":true,
                     "hasChild":true,
                     "compId":10,
                     "child":[
                         {
+                            "x":45,
                             "type":"Box",
                             "searchKey":"Box,render",
                             "props":{"y":1,"x":0,"width":640,"name":"render","height":170},
@@ -136,6 +138,7 @@
                             "compId":11,
                             "child":[
                                 {
+                                    "x":60,
                                     "type":"Image",
                                     "searchKey":"Image,icon",
                                     "props":{"y":0,"x":0,"width":640,"name":"icon","height":170},

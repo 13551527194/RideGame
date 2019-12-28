@@ -100,4 +100,10 @@
    <item name="scene/TestView.scene" props="" ifExport="分离模式" aName=""/>
    <item name="scene/BufferRes.scene" props="" ifExport="内嵌模式" aName=""/>
    <item name="scene/BufferLayer.scene" props="" ifExport="默认" aName=""/>
+   <item name="mainGameBox.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="rightGameBox.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="CenterGameBox.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="scene/netError.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="scene/newhand1.scene" props="" ifExport="内嵌模式" aName=""/>
+   <item name="OppoIcon120.scene" props="" ifExport="内嵌模式" aName=""/>
 </page>

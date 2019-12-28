@@ -2,11 +2,11 @@
     "x":0,
     "type":"View",
     "selectedBox":2,
-    "selecteID":38,
+    "selecteID":113,
     "searchKey":"View",
     "props":{"y":0,"x":0,"width":750,"sceneColor":"#000000","height":1334},
     "nodeParent":-1,
-    "maxID":112,
+    "maxID":116,
     "label":"View",
     "isOpen":true,
     "isDirectory":true,
@@ -536,6 +536,61 @@
                                 ]
                         }]
                 }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,redBtn",
+            "props":{"y":310,"width":80,"var":"redBtn","height":74},
+            "nodeParent":2,
+            "label":"redBtn",
+            "isOpen":false,
+            "isDirectory":true,
+            "isAniNode":true,
+            "hasChild":true,
+            "compId":112,
+            "child":[
+                {
+                    "type":"Image",
+                    "searchKey":"Image",
+                    "props":{"y":0,"x":80,"skin":"comp/btn_slide.png","scaleX":-1,"label":"label"},
+                    "nodeParent":112,
+                    "label":"Image",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":114,
+                    "child":[
+                        ]
+                },
+                {
+                    "type":"UIView",
+                    "source":"scene/RedPointView.scene",
+                    "searchKey":"UIView,redPoint",
+                    "props":{"y":-79,"x":55,"var":"redPoint"},
+                    "nodeParent":112,
+                    "label":"redPoint",
+                    "isDirectory":false,
+                    "isAniNode":true,
+                    "hasChild":false,
+                    "compId":115,
+                    "child":[
+                        ]
+                }]
+        },
+        {
+            "x":15,
+            "type":"Box",
+            "searchKey":"Box,rightOppoBox",
+            "props":{"y":310,"x":613,"width":130,"var":"rightOppoBox","height":130},
+            "nodeParent":2,
+            "label":"rightOppoBox",
+            "isDirectory":false,
+            "isAniNode":true,
+            "hasChild":false,
+            "compId":113,
+            "child":[
+                ]
         }],
     "animations":[
         {

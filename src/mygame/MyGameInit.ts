@@ -1,7 +1,7 @@
 import IGameInit from "../game/IGameInit";
 import App from "../game/App";
 
-import MainScene from "./scene/MainScene";
+// import MainScene from "./scene/MainScene";
 import MainSceneMediator from "./mediator/MainSceneMediator";
 import SelectStageScene from "./scene/SelectStageScene";
 import SelectStageMediator from "./mediator/SelectStageMediator";

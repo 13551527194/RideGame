@@ -4,7 +4,7 @@
     "versionName": "1.0",
     "versionCode": 1,
     "minPlatformVersion": 1050,
-    "icon": "./logo.jpg",
+    "icon": "./icon256.jpg",
     "orientation": "portrait",
     "type": "game",
     "config": {

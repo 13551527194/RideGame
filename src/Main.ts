@@ -14,6 +14,7 @@ import LoadView2 from "./mygame/scene/LoadView2";
 import LogType from "./mygame/session/LogType";
 import MyConfig from "./MyConfig";
 import MyDeBug from "./MyDeBug";
+import RightGameBox from "./oppoGame/RightGameBox";
 
 class Main {
 
@@ -44,7 +45,7 @@ class Main {
 		UIConfig.popupBgAlpha = 0.7;
 		//激活资源版本控制，version.json由IDE发布功能自动生成，如果没有也不影响后续流程
 		// if( Laya.Browser.onMiniGame ){
-			Laya.URL.basePath = "https://img.kuwan511.com/rideGame/" + DataSession.GAME_VER + "/";
+			Laya.URL.basePath = "https://img.kuwan511.com/rideGame/oppo/" + DataSession.GAME_VER + "/";
 		// }else{
 		// 	Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
 		// 	if( Laya.Browser.onPC ){
@@ -65,7 +66,6 @@ class Main {
 		Laya.stage.addChild( this.t );
 		this.setText( "正在加载config文件" );
 
-		//return;
 		Laya.loader.load("config.json?ver=" + Math.random()  , new Laya.Handler(this,this.configFun) , null, Laya.Loader.JSON );
 		DataSession.staticLog( LogType.LOAD_CONFIG );
 
@@ -80,6 +80,9 @@ class Main {
 			MyConfig.IP = configJson.IP;
 			MyConfig.PLATFORM = configJson.PLATFORM;
 			MyConfig.TEST = configJson.TEST;
+			MyConfig.oppoGames = configJson.oppoGames;
+			MyConfig.rightGame = configJson.rightGame;
+			MyConfig.oppoSwitch = configJson.oppoSwitch;
 			if( MyConfig.PLATFORM == 10 ){
 				Laya.URL.basePath = "https://img.kuwan511.com/rideGame/4.2.0/";
 			}
@@ -90,26 +93,27 @@ class Main {
 			MyConfig.TEST = 0;
 		}
 		//ZipLoader.load("all.zip",new Laya.Handler(this,this.allZipFun) );
-		this.loadVersion();
+		// this.loadVersion();
+		this.onVersionLoaded();
 		this.setText( "正在加载version文件" );
 	}
 
-	public allZipFun( arr:Array<string> ):void{
-		let j = JSON.parse( arr[1] );
-		let l = new Laya.Loader();
-		(<any>l).parsePLFData( j );
-		for ( let k in j.json ){
-			if( k.indexOf(".atlas") == -1 ){
-				Laya.loader.cacheRes( k, j.json[k] );
-				//Laya.loader.load( k);
-			}
-		}
-		this.loadVersion();
-	}
+	// public allZipFun( arr:Array<string> ):void{
+	// 	let j = JSON.parse( arr[1] );
+	// 	let l = new Laya.Loader();
+	// 	(<any>l).parsePLFData( j );
+	// 	for ( let k in j.json ){
+	// 		if( k.indexOf(".atlas") == -1 ){
+	// 			Laya.loader.cacheRes( k, j.json[k] );
+	// 			//Laya.loader.load( k);
+	// 		}
+	// 	}
+	// 	this.loadVersion();
+	// }
 
-	public loadVersion():void{
-		Laya.ResourceVersion.enable("version.json?v=" + Math.random(), Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
-	}
+	// public loadVersion():void{
+	// 	Laya.ResourceVersion.enable("version.json?v=" + Math.random(), Laya.Handler.create(this, this.onVersionLoaded), Laya.ResourceVersion.FILENAME_VERSION);
+	// }
 
 	onVersionLoaded(): void {
 		//激活大小图映射，加载小图的时候，如果发现小图在大图合集里面，则优先加载大图合集，而不是小图

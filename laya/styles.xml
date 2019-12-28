@@ -30,4 +30,5 @@
    <item name="battlescene/laixiBG1.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
    <item name="battlescene/laixiBG2.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
    <item name="loading/shan.png" type="Sprite" compress="0" pack="1" quality="80" props="" picType="0" scale="0"/>
+   <item name="oppo" type="" compress="0" pack="2" quality="80" props="" picType="0" scale="0"/>
 </res>

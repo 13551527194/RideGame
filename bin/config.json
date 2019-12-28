@@ -1,5 +1,33 @@
 {
 	"TEST":0,
-	"IP":"http://10.92.22.248:8082/",
-	"PLATFORM":0
+	"IP":"https://st.kuwan511.com/",
+	"PLATFORM":1,
+	"oppoGames": [
+		{
+			"name": "脑洞大爆炸",
+			"url": "naodong.png",
+			"packName": "com.handarui.zuiqiangnaodong.nearme.gamecenter"
+		},
+		{
+			"name": "一拳之下",
+			"url": "yiquan.png",
+			"packName": "com.dreamjelly.yqzx.nearme.gamecenter"
+		},
+		{
+			"name": "手指魔法师",
+			"url": "mofashi.png",
+			"packName": "com.handarui.szmfs.nearme.gamecenter"
+		},
+		{
+			"name": "屠龙勇者",
+			"url": "tulong.png",
+			"packName": "com.thggame.tlyz.kyx.nearme.gamecenter"
+		}
+	],
+	"rightGame":{
+			"name": "一拳之下",
+			"url": "yiquan.png",
+			"packName": "com.dreamjelly.yqzx.nearme.gamecenter"
+		},
+	"oppoSwitch":1
 }

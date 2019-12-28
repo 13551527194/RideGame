@@ -17,7 +17,7 @@
     "compressImageNoteList": [
         ""
     ],
-    "compressJs": false,
+    "compressJs": true,
     "compressJsFilter": [
         "$basePath/**/*.js"
     ],
@@ -56,16 +56,16 @@
         ""
     ],
     "clearReleaseDir": true,
-    "compile": false,
+    "compile": true,
     "forceCompile": false,
     "onlyIndexJS": true,
     "projectType": "ts",
-    "pubTime": 1577350393192,
+    "pubTime": 1577511572029,
     "oppoInfo": {
         "name": "勇闯恶魔大陆",
         "projName": "quickgame",
         "package": "com.handarui.ycemdl.nearme.gamecenter",
-        "icon": "D:\\Knight2.2\\logo.jpg",
+        "icon": "D:\\RideGame\\icon256.jpg",
         "versionName": "1.0",
         "versionCode": 1,
         "minPlatformVersion": 1050,
