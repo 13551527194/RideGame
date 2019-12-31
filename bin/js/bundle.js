@@ -4050,6 +4050,13 @@
         haveNewPet() {
             return this.petSession.eggNum > 0;
         }
+        deleteOldEquip(oldEquip) {
+            this.bagMap.deleteData(oldEquip.type, oldEquip, 1);
+            this.resetEquip();
+            App.sendEvent(MyEvent.EQUIP_UPDATE);
+            App.sendEvent(MyEvent.MERGE_EQUIP);
+            Laya.timer.callLater(this, this.nextFun);
+        }
         addEquipInBag(equip, toIndex = -1) {
             let arr = this.bagMap.getData(equip.type);
             arr.length = BagSession.BAG_LENGTH;
@@ -9175,10 +9182,10 @@
         }
         init() {
             if (App.getInstance().nowSceneUrl == MyGameInit.MainScene) {
-                this.dialog.yesBtn.disabled = true;
+                this.dialog.yesBtn.visible = false;
             }
             else {
-                this.dialog.yesBtn.disabled = false;
+                this.dialog.yesBtn.visible = true;
             }
             this.reset();
             let s1 = "ID:" + this.dataSession.saveKey.substring(this.dataSession.saveKey.length - 4);
@@ -9483,6 +9490,7 @@
         overFun() {
             let sys = App.getConfig(MyGameInit.sys_item, this.equip.id);
             let e = this.bagSession.getNewItem(sys.itemType, this.equip.lv + 2);
+            this.bagSession.deleteOldEquip(this.equip);
             this.bagSession.addEquipInBag(e);
             App.dialog(MyGameInit.NewGetItemDialog, false, e);
             this.dialog.close();

@@ -38,9 +38,9 @@ export default class SettingMediator extends Mediator{
 
     public init():void {
         if( App.getInstance().nowSceneUrl == MyGameInit.MainScene ){
-            this.dialog.yesBtn.disabled = true;
+            this.dialog.yesBtn.visible = false;
         }else{
-            this.dialog.yesBtn.disabled = false;
+            this.dialog.yesBtn.visible = true;
         }
         this.reset();
         let s1 = "ID:" + this.dataSession.saveKey.substring( this.dataSession.saveKey.length - 4  );

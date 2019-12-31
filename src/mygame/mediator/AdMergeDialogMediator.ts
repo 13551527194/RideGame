@@ -72,6 +72,7 @@ export default class AdMergeDialogMediator extends Mediator{
     public overFun():void{
         let sys = <SysItem>App.getConfig( MyGameInit.sys_item , this.equip.id );
         let e = this.bagSession.getNewItem( sys.itemType , this.equip.lv + 2 );
+        this.bagSession.deleteOldEquip(this.equip);
         this.bagSession.addEquipInBag(e);
         App.dialog( MyGameInit.NewGetItemDialog , false ,  e );
         this.dialog.close();

@@ -198,6 +198,16 @@ export default class BagSession extends Session {
         return this.petSession.eggNum > 0;
     }
 
+    public deleteOldEquip(oldEquip:Equip):void
+    {
+        //无论合成成功还是失败 被拖拽的物品都消失
+        this.bagMap.deleteData( oldEquip.type ,oldEquip ,1 );
+        this.resetEquip();
+        App.sendEvent(MyEvent.EQUIP_UPDATE);
+        App.sendEvent(MyEvent.MERGE_EQUIP);
+        Laya.timer.callLater( this, this.nextFun );
+    }
+
     /**
      * @param equip 添加一件装备到背包里
      */
